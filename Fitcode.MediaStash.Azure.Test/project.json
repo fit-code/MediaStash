@@ -5,8 +5,7 @@
   },
 
   "dependencies": {
-    "Fitcode.MediaStash.Azure": "1.0.0-*",
-    "Fitcode.MediaStash.Lib": "1.0.0-*",
+    "Fitcode.MediaStash.Azure": "0.0.0.1",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"

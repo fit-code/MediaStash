@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Fitcode.io")]
 [assembly: AssemblyProduct("Fitcode.MediaStash.Azure")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Copyright Fitcode.io 2017")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from

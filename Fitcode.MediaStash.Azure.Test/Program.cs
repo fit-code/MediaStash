@@ -19,7 +19,7 @@ namespace Fitcode.MediaStash.Azure.Test
         {
             _config = new RepositoryConfiguration
             {
-                ConnectionString = "DefaultEndpointsProtocol=https;AccountName=;AccountKey=",
+                ConnectionString = File.ReadAllText("storage_connection.txt"),
                 RootContainer = "dev"
             };
             _mediaRepository = new MediaRepository(_config);
@@ -28,7 +28,7 @@ namespace Fitcode.MediaStash.Azure.Test
 
             _mediaRepository.StashMedia($@"{id}", new List<FileStreamMedia>
             {
-                new FileStreamMedia("anime16.jpg",new FileStream(@"anime16.jpg", FileMode.Open))
+                new FileStreamMedia("anime16.jpg",new FileStream(@"C:\Users\felip_kw0ekdh\Desktop\anime16.jpg", FileMode.Open))
             }).Wait();
 
             var media = _mediaRepository.GetMedia($@"{id}").Result;
