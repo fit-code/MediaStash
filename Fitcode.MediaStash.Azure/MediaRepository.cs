@@ -50,12 +50,12 @@ namespace Fitcode.MediaStash.Azure
 
         public IRepositoryConfiguration Config { get; private set; }
 
-        public async Task Persist(IMediaContainer mediaContainer)
+        public async Task StashContainer(IMediaContainer mediaContainer)
         {
-            await Persist(mediaContainer, Config.RootContainer);
+            await StashContainer(mediaContainer, Config.RootContainer);
         }
 
-        public async Task Persist(IMediaContainer mediaContainer, string storageContainer)
+        public async Task StashContainer(IMediaContainer mediaContainer, string storageContainer)
         {
             CloudBlobContainer rootContainer = _blobClient.GetContainerReference(storageContainer);
 
@@ -74,12 +74,26 @@ namespace Fitcode.MediaStash.Azure
             }
         }
 
-        public async Task<IMediaContainer> Retrieve(string path)
+        public async Task StashMedia(string path, IEnumerable<IMedia> mediaCollection)
         {
-            return await Retrieve(path, Config.RootContainer);
+            await StashMedia(path, Config.RootContainer, mediaCollection);
         }
 
-        public async Task<IMediaContainer> Retrieve(string path, string storageContainer)
+        public async Task StashMedia(string path, string storageContainer, IEnumerable<IMedia> mediaCollection)
+        {
+            await StashContainer(new MediaContainer
+            {
+                Path = path,
+                Media = mediaCollection.Select(s => new GenericMedia(s.Name, s.Data)).AsEnumerable()
+            }, storageContainer);
+        }
+
+        public async Task<IMediaContainer> GetMediaContainer(string path)
+        {
+            return await GetMediaContainer(path, Config.RootContainer);
+        }
+
+        public async Task<IMediaContainer> GetMediaContainer(string path, string storageContainer)
         {
             CloudBlobContainer rootContainer = _blobClient.GetContainerReference(storageContainer);
 
@@ -115,6 +129,16 @@ namespace Fitcode.MediaStash.Azure
             {
                 throw new InvalidOperationException($"Container <{Config.RootContainer}> does not exist.");
             }
+        }
+
+        public Task<IEnumerable<IMedia>> GetMedia(string path)
+        {
+            return GetMedia(path, Config.RootContainer);
+        }
+
+        public async Task<IEnumerable<IMedia>> GetMedia(string path, string storageContainer)
+        {
+            return (await GetMediaContainer(path, storageContainer))?.Media;
         }
     }
 }

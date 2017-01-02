@@ -23,26 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
 using Fitcode.MediaStash.Lib.Contracts;
 
-namespace Fitcode.MediaStash.Lib.Models
+namespace Fitcode.MediaStash.Lib
 {
-    /// <summary>
-    /// GenericMedia stores media data at the lowest form.
-    /// </summary>
-    public class GenericMedia : IMedia
+    public class RepositoryConfiguration : IRepositoryConfiguration
     {
-        public byte[] Data { get; private set; }
+        public string ConnectionString { get; set; }
 
-        public string Name { get; set; }
-
-        public bool AutoDisposeOnDataCall { get; set; } = false;
-
-        public GenericMedia(string name, byte[] data)
-        {
-            this.Name = name;
-            this.Data = data;
-        }
+        public string RootContainer { get; set; }
     }
 }

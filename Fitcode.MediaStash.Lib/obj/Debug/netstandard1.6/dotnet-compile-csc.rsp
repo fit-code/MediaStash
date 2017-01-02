@@ -54,6 +54,7 @@
 -r:"C:\Users\felip_kw0ekdh\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\felip_kw0ekdh\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
 "C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib\MediaExtensions.cs"
+"C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib\RepositoryConfiguration.cs"
 "C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib\Contracts\IMedia.cs"
 "C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib\Contracts\IMediaContainer.cs"
 "C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib\Contracts\IMediaRepository.cs"

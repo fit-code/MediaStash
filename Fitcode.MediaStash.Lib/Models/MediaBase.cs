@@ -38,13 +38,15 @@ namespace Fitcode.MediaStash.Lib.Models
         public string Name { get; set; }
 
         public T Media { get; set; }
+        public bool AutoDisposeOnDataCall { get; set; } = true;
 
         public virtual byte[] Data
         {
             get
             {
+                if (!_disposed) _disposed = AutoDisposeOnDataCall;
 
-                return Media?.ToByteArray();
+                return Media?.ToByteArray(AutoDisposeOnDataCall);
             }
         }
 

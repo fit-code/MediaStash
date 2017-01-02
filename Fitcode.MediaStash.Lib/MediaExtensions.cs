@@ -24,11 +24,18 @@
 #endregion
 
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib
 {
     public static class MediaExtensions
     {
+        /// <summary>
+        /// Grab the byte array for any stream.
+        /// </summary>
+        /// <param name="stream">Stream child.</param>
+        /// <param name="autoDispose">Cleanup orignal Stream once we have the data.</param>
+        /// <returns>byte[stream.Length]</returns>
         public static byte[] ToByteArray(this Stream stream, bool autoDispose = false)
         {
             if (stream == null) return null;
@@ -43,6 +50,41 @@ namespace Fitcode.MediaStash.Lib
             }
 
             return buffer;
+        }
+
+        /// <summary>
+        /// Convert FileStreams to MemoryStream.
+        /// </summary>
+        /// <param name="fileStream">FileStream</param>
+        /// <param name="autoDispose">Cleanup orignal Stream once we have the data.</param>
+        /// <returns>MemoryStream representation of passed in FileStream.</returns>
+        public static async Task<MemoryStream> ToMemory(this FileStream fileStream, bool autoDispose = false)
+        {
+            if (fileStream == null) return null;
+
+            var memory = new MemoryStream();
+
+            await fileStream.CopyToAsync(memory);
+
+            if (autoDispose)
+            {
+                fileStream.Dispose();
+                fileStream = null;
+            }
+
+            return memory;
+        }
+
+        /// <summary>
+        /// Simple buffer to MemoryStream conversion with safety check.
+        /// </summary>
+        /// <param name="buffer">byte[]</param>
+        /// <returns>MemoryStream</returns>
+        public static MemoryStream ToMemory(this byte[] buffer)
+        {
+            if (buffer == null || buffer.Length == 0) return null;
+
+            return new MemoryStream(buffer);
         }
     }
 }

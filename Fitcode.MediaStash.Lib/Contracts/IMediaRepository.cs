@@ -23,17 +23,81 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib.Contracts
 {
+    /// <summary>
+    /// Media repository contract for all concrete service (Azure, Amazon, Dropbox, etc)
+    /// </summary>
     public interface IMediaRepository
     {
+        /// <summary>
+        /// Configuration contract
+        /// </summary>
         IRepositoryConfiguration Config { get; }
 
-        Task Persist(IMediaContainer mediaContainer);
-        Task Persist(IMediaContainer mediaContainer, string storageContainer);
-        Task<IMediaContainer> Retrieve(string path);
-        Task<IMediaContainer> Retrieve(string path, string storageContainer);
+        /// <summary>
+        /// Store a collection of media elements grouped by container.
+        /// </summary>
+        /// <param name="mediaContainer">Media Container</param>
+        /// <returns>Task.Completed unless exception is thrown.</returns>
+        Task StashContainer(IMediaContainer mediaContainer);
+
+        /// <summary>
+        /// Store a collection of media elements grouped by container.
+        /// </summary>
+        /// <param name="mediaContainer">Media Container</param>
+        /// <param name="storageContainer">Overrides configuration root container.</param>
+        /// <returns>Task.Completed unless exception is thrown.</returns>
+        Task StashContainer(IMediaContainer mediaContainer, string storageContainer);
+
+        /// <summary>
+        /// Store a collection of media passed as IEnumerable.
+        /// </summary>
+        /// <param name="path">Path travelled from root container.</param>
+        /// <param name="mediaCollection">IEnumerable of IMedia contract.</param>
+        /// <returns>Task.Completed unless exception is thrown.</returns>
+        Task StashMedia(string path, IEnumerable<IMedia> mediaCollection);
+
+        /// <summary>
+        /// Store a collection of media passed as IEnumerable.
+        /// </summary>
+        /// <param name="path">Path travelled from root container.</param>
+        /// <param name="storageContainer">Overrides configuration root container.</param>
+        /// <param name="mediaCollection">IEnumerable of IMedia contract.</param>
+        /// <returns>Task.Completed unless exception is thrown.</returns> 
+        Task StashMedia(string path, string storageContainer, IEnumerable<IMedia> mediaCollection);
+
+        /// <summary>
+        /// Create and return media container found at passed path.
+        /// </summary>
+        /// <param name="path">Path travelled from root container.</param>
+        /// <returns>Concrete IMediaContainer implementation <see cref="Models.MemoryStreamMedia"/></returns>
+        Task<IMediaContainer> GetMediaContainer(string path);
+
+        /// <summary>
+        /// Create and return media container found at passed path.
+        /// </summary>
+        /// <param name="path">Path travelled from root container.</param>
+        /// <param name="storageContainer">Overrides configuration root container.</param>
+        /// <returns>Concrete IMediaContainer implementation <see cref="Models.MemoryStreamMedia"/></returns>
+        Task<IMediaContainer> GetMediaContainer(string path, string storageContainer);
+
+        /// <summary>
+        /// Return IEnumerable of IMedia found at passed path.
+        /// </summary>
+        /// <param name="path">Path travelled from root container.</param>
+        /// <returns>Collection of IMedia <see cref="Models.MemoryStreamMedia"/></returns>
+        Task<IEnumerable<IMedia>> GetMedia(string path);
+
+        /// <summary>
+        /// Return IEnumerable of IMedia found at passed path.
+        /// </summary>
+        /// <param name="path">Path travelled from root container.</param>
+        /// <param name="storageContainer">Overrides configuration root container.</param>
+        /// <returns>Collection of IMedia <see cref="Models.MemoryStreamMedia"/></returns>
+        Task<IEnumerable<IMedia>> GetMedia(string path, string storageContainer);
     }
 }

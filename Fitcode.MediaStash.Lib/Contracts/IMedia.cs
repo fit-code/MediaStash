@@ -32,5 +32,6 @@ namespace Fitcode.MediaStash.Lib.Contracts
     {
         string Name { get; }
         byte[] Data { get; }
+        bool AutoDisposeOnDataCall { get; set; }
     }
 }
