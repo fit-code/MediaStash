@@ -1,4 +1,3 @@
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib.Portable\obj\Debug\Fitcode.MediaStash.Lib.Portable.csprojResolveAssemblyReference.cache
 C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib.Portable\bin\Debug\Fitcode.MediaStash.Lib.Portable.dll
 C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib.Portable\bin\Debug\Fitcode.MediaStash.Lib.Portable.pdb
 C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\Fitcode.MediaStash.Lib.Portable\bin\Debug\PCLStorage.Abstractions.dll
