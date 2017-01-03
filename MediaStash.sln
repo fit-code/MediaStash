@@ -15,6 +15,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fitcode.MediaStash.Azure.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitcode.MediaStash.Lib.Portable", "Fitcode.MediaStash.Lib.Portable\Fitcode.MediaStash.Lib.Portable.csproj", "{71DD436C-B63E-4896-9A14-A938A195DB25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitcode.MediaStash.Azure.Portable", "Fitcode.MediaStash.Azure.Portable\Fitcode.MediaStash.Azure.Portable.csproj", "{A4BB6156-DC90-481A-8CC0-9D434B0DD4BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{71DD436C-B63E-4896-9A14-A938A195DB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71DD436C-B63E-4896-9A14-A938A195DB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71DD436C-B63E-4896-9A14-A938A195DB25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4BB6156-DC90-481A-8CC0-9D434B0DD4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4BB6156-DC90-481A-8CC0-9D434B0DD4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4BB6156-DC90-481A-8CC0-9D434B0DD4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4BB6156-DC90-481A-8CC0-9D434B0DD4BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
