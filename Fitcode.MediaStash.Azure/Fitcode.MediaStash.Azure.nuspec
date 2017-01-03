@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Fitcode.MediaStash.Azure</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>Fitcode.MediaStash.Azure</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io / Felipe Ramos</owners>
