@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation

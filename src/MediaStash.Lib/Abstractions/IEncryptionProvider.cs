@@ -24,40 +24,30 @@
 #endregion
 
 using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Models
+namespace MediaStash.Lib.Abstractions
 {
-    public class MemoryMediaContainer : IMediaContainer
+    public interface IEncryptionProvider
     {
-        public string Path { get; set; }
-        public IEnumerable<MemoryStreamMedia> Media { get; set; }
+        Task EncryptAsync(MediaContainer mediaContainer);
+        Task EncryptAsync(MemoryMediaContainer memoryMediaContainer);
+        Task EncryptAsync(IEnumerable<IMedia> mediaCollection);
 
-        IEnumerable<IMedia> IMediaContainer.Media => Media;
+        void Encrypt(MediaContainer mediaContainer);
+        void Encrypt(MemoryMediaContainer memoryMediaContainer);
+        void Encrypt(IEnumerable<IMedia> mediaCollection);
 
-        private bool _disposed = false;
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        Task<MediaContainer> DecryptAsync(byte[] buffer);
+        Task<MediaContainer> DecryptAsync(MemoryStream stream);
 
-        private void Dispose(bool isDisposing)
-        {
-            if (_disposed) return;
-            if (isDisposing)
-            {
-                _disposed = true;
-
-                if (Media != null)
-                {
-                    foreach (var file in Media)
-                    {
-                        file.Dispose();
-                    }
-                }
-            }
-        }
+        MediaContainer Decrypt(byte[] buffer);
+        MediaContainer Decrypt(MemoryStream stream);
     }
 }

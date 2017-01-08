@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,14 +23,32 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
+using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Models;
+using MediaStash.Lib.Models;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Contracts
+namespace MediaStash.Lib.Abstractions
 {
-    public interface IMediaContainer : IDisposable
+    public interface ICompressionProvider
     {
-        string Path { get; }
-        IEnumerable<IMedia> Media { get; }
+        ICompressionConfiguration Config { get; }
+
+        Task<CompressedPack> PackAsync(string name, MediaContainer mediaContainer);
+        Task<CompressedPack> PackAsync(string name, MemoryMediaContainer memoryMediaContainer);
+        Task<CompressedPack> PackAsync(string name, IEnumerable<IMedia> mediaCollection);
+
+        CompressedPack Pack(string name, MediaContainer mediaContainer);
+        CompressedPack Pack(string name, MemoryMediaContainer memoryMediaContainer);
+        CompressedPack Pack(string name, IEnumerable<IMedia> mediaCollection);
+
+        Task<MediaContainer> UnpackAsync(byte[] buffer);
+        Task<MediaContainer> UnpackAsync(MemoryStream stream);
+
+        MediaContainer Unpack(byte[] buffer);
+        MediaContainer Unpack(MemoryStream stream);
+
     }
 }

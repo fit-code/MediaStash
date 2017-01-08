@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,8 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib.Abstractions;
 using System;
-using Fitcode.MediaStash.Lib.Contracts;
 using System.IO;
 
 namespace Fitcode.MediaStash.Lib.Models
@@ -37,6 +37,7 @@ namespace Fitcode.MediaStash.Lib.Models
         public byte[] Data { get; private set; }
 
         public string Name { get; set; }
+        public string Uri { get; set; }
 
         public bool AutoDisposeOnDataCall { get; set; } = false;
 
@@ -49,6 +50,14 @@ namespace Fitcode.MediaStash.Lib.Models
         public GenericMedia(string name, Stream stream) : this(name, stream.ToByteArray(true))
         {
 
+        }
+
+        public string ToBase64String()
+        {
+            if (Data == null)
+                return null;
+
+            return Convert.ToBase64String(Data);
         }
     }
 }

@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,17 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IMedia.cs" />
-    <Compile Include="Contracts\IMediaContainer.cs" />
-    <Compile Include="Contracts\IMediaRepository.cs" />
-    <Compile Include="Contracts\IRepositoryConfiguration.cs" />
+    <Compile Include="Abstractions\ICompressionProvider.cs" />
+    <Compile Include="Abstractions\IEncryptionProvider.cs" />
+    <Compile Include="Abstractions\IMedia.cs" />
+    <Compile Include="Abstractions\IMediaContainer.cs" />
+    <Compile Include="Abstractions\IMediaRepository.cs" />
+    <Compile Include="Abstractions\IRepositoryConfiguration.cs" />
     <Compile Include="MediaExtensions.cs" />
+    <Compile Include="Models\CompressedPack.cs" />
     <Compile Include="Models\GenericMedia.cs" />
     <Compile Include="Models\MediaBase.cs" />
     <Compile Include="Models\MediaContainer.cs" />
     <Compile Include="Models\MemoryMediaContainer.cs" />
     <Compile Include="Models\MemoryStreamMedia.cs" />
+    <Compile Include="Models\PackBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\CompressionProvider.cs" />
     <Compile Include="RepositoryConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

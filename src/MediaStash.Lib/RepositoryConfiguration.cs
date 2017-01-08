@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,7 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Contracts;
+using System.Collections.Generic;
+using Fitcode.MediaStash.Lib.Abstractions;
 
 namespace Fitcode.MediaStash.Lib
 {
@@ -32,5 +33,13 @@ namespace Fitcode.MediaStash.Lib
         public string ConnectionString { get; set; }
 
         public string RootContainer { get; set; }
+    }
+
+    public class CompressionConfiguration : ICompressionConfiguration
+    {
+        public IEnumerable<string> SupportedExtensions { get; set; } = new List<string>
+        {
+             ".png", ".gif", ".bmp", ".jpg", ".avi", ".mp4", ".flv"
+        };
     }
 }

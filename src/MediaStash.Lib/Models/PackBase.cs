@@ -23,41 +23,25 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
-using System;
-using System.Collections.Generic;
+using System.IO;
 
-namespace Fitcode.MediaStash.Lib.Models
+namespace MediaStash.Lib.Models
 {
-    public class MemoryMediaContainer : IMediaContainer
+    public abstract class PackBase<T> where T : Stream
     {
-        public string Path { get; set; }
-        public IEnumerable<MemoryStreamMedia> Media { get; set; }
+        public string Name { get; set; }
+        public string Uri { get; set; }
+        public T Package { get; set; }
 
-        IEnumerable<IMedia> IMediaContainer.Media => Media;
-
-        private bool _disposed = false;
-        public void Dispose()
+        public PackBase(string name, T package)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            this.Name = name;
+            this.Package = package;
         }
 
-        private void Dispose(bool isDisposing)
+        public PackBase(string name, T package, string uri) : this(name, package)
         {
-            if (_disposed) return;
-            if (isDisposing)
-            {
-                _disposed = true;
-
-                if (Media != null)
-                {
-                    foreach (var file in Media)
-                    {
-                        file.Dispose();
-                    }
-                }
-            }
+            this.Uri = uri;
         }
     }
 }

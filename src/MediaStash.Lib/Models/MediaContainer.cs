@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Contracts;
+using Fitcode.MediaStash.Lib.Abstractions;
 using System.Collections.Generic;
 
 namespace Fitcode.MediaStash.Lib.Models

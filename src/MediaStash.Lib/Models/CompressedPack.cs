@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,15 +23,25 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace Fitcode.MediaStash.Lib.Contracts
+using System.IO;
+
+namespace MediaStash.Lib.Models
 {
-    /// <summary>
-    /// Lowest common denominator for media data.
-    /// </summary>
-    public interface IMedia
+    public class CompressedPack : PackBase<MemoryStream>
     {
-        string Name { get; }
-        byte[] Data { get; }
-        bool AutoDisposeOnDataCall { get; set; }
+        public CompressedPack(string name, byte[] packageBytes) : base(name, new MemoryStream(packageBytes))
+        {
+
+        }
+
+        public CompressedPack(string name, MemoryStream packaged):base(name, packaged)
+        {
+
+        }
+
+        public CompressedPack(string name, MemoryStream packaged, string uri) : base(name, packaged, uri)
+        {
+
+        }
     }
 }

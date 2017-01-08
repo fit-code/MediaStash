@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) 2017 Fitcode.io
+// Copyright (c) 2017 Fitcode.io (info@fitcode.io)
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -30,8 +30,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Fitcode.MediaStash.Lib.Contracts;
 using Fitcode.MediaStash.Lib.Models;
+using Fitcode.MediaStash.Lib.Abstractions;
 
 namespace Fitcode.MediaStash.Azure
 {

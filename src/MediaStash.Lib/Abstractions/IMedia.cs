@@ -23,41 +23,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
-using System;
-using System.Collections.Generic;
-
-namespace Fitcode.MediaStash.Lib.Models
+namespace Fitcode.MediaStash.Lib.Abstractions
 {
-    public class MemoryMediaContainer : IMediaContainer
+    /// <summary>
+    /// Lowest common denominator for media data.
+    /// </summary>
+    public interface IMedia
     {
-        public string Path { get; set; }
-        public IEnumerable<MemoryStreamMedia> Media { get; set; }
-
-        IEnumerable<IMedia> IMediaContainer.Media => Media;
-
-        private bool _disposed = false;
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool isDisposing)
-        {
-            if (_disposed) return;
-            if (isDisposing)
-            {
-                _disposed = true;
-
-                if (Media != null)
-                {
-                    foreach (var file in Media)
-                    {
-                        file.Dispose();
-                    }
-                }
-            }
-        }
+        string Name { get; }
+        string Uri { get; }
+        byte[] Data { get; }
+        
+        string ToBase64String();
     }
 }
