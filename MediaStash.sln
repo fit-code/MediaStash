@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		Fitcode.MediaStash.Azure.Test\storage_connection.txt = Fitcode.MediaStash.Azure.Test\storage_connection.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaStash.Azure", "MediaStash.Azure\MediaStash.Azure.csproj", "{604A92CE-81C5-4AEA-887C-FC650A7D6337}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaStash.Lib", "src\MediaStash.Lib\MediaStash.Lib.csproj", "{194190E8-BE0B-4914-A044-B4A5C5B7D555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaStash.Lib", "MediaStash.Lib\MediaStash.Lib.csproj", "{194190E8-BE0B-4914-A044-B4A5C5B7D555}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaStash.Azure", "src\MediaStash.Azure\MediaStash.Azure.csproj", "{604A92CE-81C5-4AEA-887C-FC650A7D6337}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,14 +18,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Release|Any CPU.Build.0 = Release|Any CPU
 		{194190E8-BE0B-4914-A044-B4A5C5B7D555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{194190E8-BE0B-4914-A044-B4A5C5B7D555}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{194190E8-BE0B-4914-A044-B4A5C5B7D555}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{194190E8-BE0B-4914-A044-B4A5C5B7D555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604A92CE-81C5-4AEA-887C-FC650A7D6337}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
