@@ -24,6 +24,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Fitcode.MediaStash.Lib.Abstractions
 {
@@ -37,5 +38,12 @@ namespace Fitcode.MediaStash.Lib.Abstractions
     public interface ICompressionConfiguration
     {
         IEnumerable<string> SupportedExtensions { get; }
+    }
+
+    public interface IEncryptionConfiguration
+    {
+        string Password { get; }
+        string Salt { get; }
+        PasswordDeriveBytes PasswordDeriveBytes { get; }
     }
 }

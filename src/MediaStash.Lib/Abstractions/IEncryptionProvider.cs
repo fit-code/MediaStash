@@ -36,6 +36,8 @@ namespace MediaStash.Lib.Abstractions
 {
     public interface IEncryptionProvider
     {
+        IEncryptionConfiguration Config { get; }
+
         Task EncryptAsync(MediaContainer mediaContainer);
         Task EncryptAsync(MemoryMediaContainer memoryMediaContainer);
         Task EncryptAsync(IEnumerable<IMedia> mediaCollection);

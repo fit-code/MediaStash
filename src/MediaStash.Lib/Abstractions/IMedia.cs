@@ -33,7 +33,6 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         string Name { get; }
         string Uri { get; }
         byte[] Data { get; }
-        
         string ToBase64String();
     }
 }

@@ -23,8 +23,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using System.Collections.Generic;
 using Fitcode.MediaStash.Lib.Abstractions;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Fitcode.MediaStash.Lib
 {
@@ -41,5 +44,38 @@ namespace Fitcode.MediaStash.Lib
         {
              ".png", ".gif", ".bmp", ".jpg", ".avi", ".mp4", ".flv"
         };
+    }
+
+    public class EncryptionConfiguration : IEncryptionConfiguration
+    {
+        public string Password { get; set; }
+
+        public string Salt { get; set; }
+
+        private PasswordDeriveBytes _passwordDeriveBytes = null;
+        public PasswordDeriveBytes PasswordDeriveBytes
+        {
+            get
+            {
+                if (_passwordDeriveBytes == null)
+                {
+                    byte[] salt = new byte[0];
+                    if (!string.IsNullOrEmpty(Salt))
+                        salt = Encoding.ASCII.GetBytes(Salt);
+
+                    _passwordDeriveBytes = new PasswordDeriveBytes(Password, salt);
+                }
+
+                return _passwordDeriveBytes;
+            }
+        }
+
+        internal byte[] GetKeyBytes
+        {
+            get
+            {
+                return PasswordDeriveBytes.GetBytes(256);
+            }
+        }
     }
 }

@@ -26,6 +26,8 @@
 using Fitcode.MediaStash.Lib.Abstractions;
 using System;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
 
 namespace Fitcode.MediaStash.Lib.Models
 {
@@ -62,7 +64,6 @@ namespace Fitcode.MediaStash.Lib.Models
 
             return Convert.ToBase64String(Data);
         }
-
 
         private bool _disposed = false;
         public void Dispose()

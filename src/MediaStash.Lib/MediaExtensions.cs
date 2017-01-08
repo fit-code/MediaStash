@@ -24,6 +24,8 @@
 #endregion
 
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib
@@ -81,6 +83,20 @@ namespace Fitcode.MediaStash.Lib
             if (buffer == null || buffer.Length == 0) return null;
 
             return new MemoryStream(buffer);
+        }
+
+        /// <summary>
+        /// Wrap hash computing into extension.
+        /// </summary>
+        /// <param name="buffer">byte[]</param>
+        /// <returns>HEX Hash</returns>
+        public static string ComputeHash(this byte[] buffer)
+        {
+            using (var md5 = MD5.Create())
+            {
+                var hash = md5.ComputeHash(buffer);
+                return string.Concat(hash.Select(x => x.ToString("X2")));
+            }
         }
     }
 }
