@@ -1,0 +1,5 @@
+C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\MediaStash.Lib\bin\Debug\MediaStash.Lib.dll
+C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\MediaStash.Lib\bin\Debug\MediaStash.Lib.pdb
+C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\MediaStash.Lib\obj\Debug\MediaStash.Lib.dll
+C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\MediaStash.Lib\obj\Debug\MediaStash.Lib.pdb
+C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\MediaStash.Lib\obj\Debug\MediaStash.Lib.csprojResolveAssemblyReference.cache

@@ -39,6 +39,8 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 storage_connection.txt
+Web.Debug.config
+Web.Release.config
 
 # Directories potentially created on remote AFP share
 .AppleDB
