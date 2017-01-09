@@ -23,7 +23,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
 using System;
 using System.Collections.Generic;
@@ -32,7 +31,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaStash.Lib.Abstractions
+namespace Fitcode.MediaStash.Lib.Abstractions
 {
     public interface IEncryptionProvider
     {
@@ -46,10 +45,10 @@ namespace MediaStash.Lib.Abstractions
         void Encrypt(MemoryMediaContainer memoryMediaContainer);
         void Encrypt(IEnumerable<IMedia> mediaCollection);
 
-        Task<MediaContainer> DecryptAsync(byte[] buffer);
-        Task<MediaContainer> DecryptAsync(MemoryStream stream);
+        Task DecryptAsync(MediaContainer mediaContainer);
+        Task DecryptAsync(IEnumerable<IMedia> mediaCollection);
 
-        MediaContainer Decrypt(byte[] buffer);
-        MediaContainer Decrypt(MemoryStream stream);
+        void Decrypt(MediaContainer mediaContainer);
+        void Decrypt(IEnumerable<IMedia> mediaCollection);
     }
 }

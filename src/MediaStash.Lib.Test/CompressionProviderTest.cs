@@ -23,32 +23,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
-using MediaStash.Lib.Models;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Test
 {
-    public interface ICompressionProvider
+    [TestFixture]
+    public class CompressionProviderTest
     {
-        ICompressionConfiguration Config { get; }
-
-        Task<CompressedPack> PackAsync(string name, MediaContainer mediaContainer);
-        Task<CompressedPack> PackAsync(string name, MemoryMediaContainer memoryMediaContainer);
-        Task<CompressedPack> PackAsync(string name, IEnumerable<IMedia> mediaCollection);
-
-        CompressedPack Pack(string name, MediaContainer mediaContainer);
-        CompressedPack Pack(string name, MemoryMediaContainer memoryMediaContainer);
-        CompressedPack Pack(string name, IEnumerable<IMedia> mediaCollection);
-
-        Task<MediaContainer> UnpackAsync(byte[] buffer);
-        Task<MediaContainer> UnpackAsync(MemoryStream stream);
-
-        MediaContainer Unpack(byte[] buffer);
-        MediaContainer Unpack(MemoryStream stream);
-
     }
 }

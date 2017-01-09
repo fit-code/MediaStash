@@ -23,6 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System.IO;
+using System.Threading.Tasks;
+
 namespace Fitcode.MediaStash.Lib.Abstractions
 {
     /// <summary>
@@ -30,9 +33,9 @@ namespace Fitcode.MediaStash.Lib.Abstractions
     /// </summary>
     public interface IMedia
     {
-        string Name { get; }
+        string Name { get; set; }
         string Uri { get; }
-        byte[] Data { get; }
-        string ToBase64String();
+        byte[] Data { get; set; }
+        string ToBase64String(); 
     }
 }

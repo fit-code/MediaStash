@@ -52,8 +52,8 @@ namespace Fitcode.MediaStash.Lib
 
         public string Salt { get; set; }
 
-        private PasswordDeriveBytes _passwordDeriveBytes = null;
-        public PasswordDeriveBytes PasswordDeriveBytes
+        private Rfc2898DeriveBytes _passwordDeriveBytes = null;
+        public Rfc2898DeriveBytes PasswordDeriveBytes
         {
             get
             {
@@ -63,19 +63,29 @@ namespace Fitcode.MediaStash.Lib
                     if (!string.IsNullOrEmpty(Salt))
                         salt = Encoding.ASCII.GetBytes(Salt);
 
-                    _passwordDeriveBytes = new PasswordDeriveBytes(Password, salt);
+                    _passwordDeriveBytes = new Rfc2898DeriveBytes(Password, salt);
                 }
 
                 return _passwordDeriveBytes;
             }
         }
 
-        internal byte[] GetKeyBytes
+        public byte[] GetKeyBytes
         {
             get
             {
                 return PasswordDeriveBytes.GetBytes(256);
             }
+        }
+
+        public string EncryptionExtension { get; set; } = ".encrypted";
+
+        public void Reset(string password, string salt)
+        {
+            this.Password = password;
+            this.Salt = salt;
+
+            this._passwordDeriveBytes = null;
         }
     }
 }

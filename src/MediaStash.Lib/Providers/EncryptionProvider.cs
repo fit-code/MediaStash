@@ -23,7 +23,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using MediaStash.Lib.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,136 +32,100 @@ using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
 using System.IO;
 using System.Security.Cryptography;
+using Fitcode.MediaStash.Lib;
 
-namespace MediaStash.Lib.Providers
+namespace Fitcode.MediaStash.Lib.Providers
 {
     public class EncryptionProvider : IEncryptionProvider
     {
 
        public IEncryptionConfiguration Config { get; private set; }
 
+        private RijndaelManaged _rijndaelManaged = new RijndaelManaged
+        {
+            Mode = CipherMode.ECB
+        };
+        private readonly ICryptoTransform _encryptor, _decryptor;
+
         public EncryptionProvider(IEncryptionConfiguration config)
         {
             Config = config;
+
+            _encryptor = _rijndaelManaged.CreateEncryptor(config.GetKeyBytes, new byte[] { });
+            _decryptor = _rijndaelManaged.CreateDecryptor(config.GetKeyBytes, new byte[] { });
         }
-
-        public MediaContainer Decrypt(MemoryStream stream)
-        {
-            throw new NotImplementedException();
-        }
-
-        public MediaContainer Decrypt(byte[] buffer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<MediaContainer> DecryptAsync(MemoryStream stream)
-        {
-            //string password = @"myKey123"; // Your Key Here
-
-            //UnicodeEncoding UE = new UnicodeEncoding();
-            //byte[] key = UE.GetBytes(password);
-
-            //FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
-
-            //RijndaelManaged RMCrypto = new RijndaelManaged();
-
-            //CryptoStream cs = new CryptoStream(fsCrypt,
-            //    RMCrypto.CreateDecryptor(key, key),
-            //    CryptoStreamMode.Read);
-
-            //FileStream fsOut = new FileStream(outputFile, FileMode.Create);
-
-            //int data;
-            //while ((data = cs.ReadByte()) != -1)
-            //    fsOut.WriteByte((byte)data);
-
-            //fsOut.Close();
-            //cs.Close();
-            //fsCrypt.Close();
-
-
-
-
-
-
-            //// Initialize Rijndael key object.
-            //RijndaelManaged symmetricKey = new RijndaelManaged();
-
-            //// If we do not have initialization vector, we cannot use the CBC mode.
-            //// The only alternative is the ECB mode (which is not as good).
-            //if (initVectorBytes.Length == 0)
-            //    symmetricKey.Mode = CipherMode.ECB;
-            //else
-            //    symmetricKey.Mode = CipherMode.CBC;
-
-            //// Create encryptor and decryptor, which we will use for cryptographic
-            //// operations.
-            //encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
-            //decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);
-
-            throw new NotImplementedException();
-        }
-
-        public Task<MediaContainer> DecryptAsync(byte[] buffer)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void Encrypt(IEnumerable<IMedia> mediaCollection)
         {
-            throw new NotImplementedException();
+            EncryptAsync(mediaCollection).Wait();
         }
 
         public void Encrypt(MemoryMediaContainer memoryMediaContainer)
         {
-            throw new NotImplementedException();
+            EncryptAsync(memoryMediaContainer.Media).Wait();
         }
 
         public void Encrypt(MediaContainer mediaContainer)
         {
-            throw new NotImplementedException();
+            EncryptAsync(mediaContainer.Media).Wait();
         }
 
-        public Task EncryptAsync(IEnumerable<IMedia> mediaCollection)
+        public async Task EncryptAsync(IEnumerable<IMedia> mediaCollection)
         {
-            
-                //string password = @"myKey123"; // Your Key Here
-                //UnicodeEncoding UE = new UnicodeEncoding();
-                //byte[] key = UE.GetBytes(password);
+            foreach (var media in mediaCollection) {
+                using (var encryptedStream = new MemoryStream())
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _encryptor, CryptoStreamMode.Write))
+                    {
+                        await cryptoStream.WriteAsync(media.Data, 0, media.Data.Length);
+                    }
 
-                //string cryptFile = outputFile;
-                //FileStream fsCrypt = new FileStream(cryptFile, FileMode.Create);
-
-                //RijndaelManaged RMCrypto = new RijndaelManaged();
-
-                //CryptoStream cs = new CryptoStream(fsCrypt,
-                //    RMCrypto.CreateEncryptor(key, key),
-                //    CryptoStreamMode.Write);
-
-                //FileStream fsIn = new FileStream(inputFile, FileMode.Open);
-
-                //int data;
-                //while ((data = fsIn.ReadByte()) != -1)
-                //    cs.WriteByte((byte)data);
-
-
-                //fsIn.Close();
-                //cs.Close();
-                //fsCrypt.Close();
-            
-
-            throw new NotImplementedException();
+                    media.Name = $"{media.Name}.{Config.EncryptionExtension}";
+                    media.Data = encryptedStream.ToByteArray();
+                }
+            }
         }
 
-        public Task EncryptAsync(MemoryMediaContainer memoryMediaContainer)
+        public async Task EncryptAsync(MemoryMediaContainer memoryMediaContainer)
         {
-            throw new NotImplementedException();
+            await EncryptAsync(memoryMediaContainer.Media);
         }
 
-        public Task EncryptAsync(MediaContainer mediaContainer)
+        public async Task EncryptAsync(MediaContainer mediaContainer)
         {
-            throw new NotImplementedException();
+            await EncryptAsync(mediaContainer.Media);
+        }
+
+        public async Task DecryptAsync(MediaContainer mediaContainer)
+        {
+            await DecryptAsync(mediaContainer.Media);
+        }
+
+        public Task DecryptAsync(IEnumerable<IMedia> mediaCollection)
+        {
+            foreach (var media in mediaCollection)
+            {
+                using (var encryptedStream = new MemoryStream())
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _encryptor, CryptoStreamMode.Read))
+                    {
+                        media.Data = cryptoStream.ToByteArray();
+                        media.Name = media.Name.Replace($".{Config.EncryptionExtension}", string.Empty);
+                    }
+                }
+            }
+
+            return Task.FromResult(0);
+        }
+
+        public void Decrypt(MediaContainer mediaContainer)
+        {
+            DecryptAsync(mediaContainer.Media).Wait();
+        }
+
+        public void Decrypt(IEnumerable<IMedia> media)
+        {
+            DecryptAsync(media).Wait();
         }
     }
 }

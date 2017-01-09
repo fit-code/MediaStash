@@ -23,7 +23,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using MediaStash.Lib.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ using System.IO.Compression;
 using MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib;
 
-namespace MediaStash.Lib.Providers
+namespace Fitcode.MediaStash.Lib.Providers
 {
     public class CompressionProvider : ICompressionProvider
     {

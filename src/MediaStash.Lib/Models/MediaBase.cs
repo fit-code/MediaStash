@@ -48,6 +48,10 @@ namespace Fitcode.MediaStash.Lib.Models
             get
             {
                 return Media?.ToByteArray();
+            }set
+            {
+                Media.SetLength(value.Length);
+                Media.Write(value, 0, value.Length);
             }
         }
 

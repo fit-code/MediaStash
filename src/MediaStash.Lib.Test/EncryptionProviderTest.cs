@@ -23,32 +23,42 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib;
 using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
-using MediaStash.Lib.Models;
+using Fitcode.MediaStash.Lib.Providers;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Test
 {
-    public interface ICompressionProvider
+    [TestFixture]
+    public class EncryptionProviderTest
     {
-        ICompressionConfiguration Config { get; }
+        private IEncryptionConfiguration _encryptionConfiguration;
+        private IEncryptionProvider _encryptionProvider;
 
-        Task<CompressedPack> PackAsync(string name, MediaContainer mediaContainer);
-        Task<CompressedPack> PackAsync(string name, MemoryMediaContainer memoryMediaContainer);
-        Task<CompressedPack> PackAsync(string name, IEnumerable<IMedia> mediaCollection);
+        [SetUp]
+        public void Init()
+        {
+            _encryptionConfiguration = new EncryptionConfiguration
+            {
+                Password = "test",
+                EncryptionExtension = ".sec"
+            };
+            _encryptionProvider = new EncryptionProvider(_encryptionConfiguration);
+        }
 
-        CompressedPack Pack(string name, MediaContainer mediaContainer);
-        CompressedPack Pack(string name, MemoryMediaContainer memoryMediaContainer);
-        CompressedPack Pack(string name, IEnumerable<IMedia> mediaCollection);
+        [TearDown]
+        public void Cleanup() { }
 
-        Task<MediaContainer> UnpackAsync(byte[] buffer);
-        Task<MediaContainer> UnpackAsync(MemoryStream stream);
+        [Test]
+        public static void Test()
+        {
 
-        MediaContainer Unpack(byte[] buffer);
-        MediaContainer Unpack(MemoryStream stream);
-
+        }
     }
 }

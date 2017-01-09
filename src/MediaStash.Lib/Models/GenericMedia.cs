@@ -34,7 +34,7 @@ namespace Fitcode.MediaStash.Lib.Models
     /// </summary>
     public class GenericMedia : IMedia
     {
-        public byte[] Data { get; private set; }
+        public byte[] Data { get; set; }
 
         public string Name { get; set; }
         public string Uri { get; set; }

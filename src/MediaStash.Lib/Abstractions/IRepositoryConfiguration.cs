@@ -42,8 +42,11 @@ namespace Fitcode.MediaStash.Lib.Abstractions
 
     public interface IEncryptionConfiguration
     {
+        string EncryptionExtension { get; }
         string Password { get; }
         string Salt { get; }
-        PasswordDeriveBytes PasswordDeriveBytes { get; }
+        Rfc2898DeriveBytes PasswordDeriveBytes { get; }
+        byte[] GetKeyBytes { get; }
+        void Reset(string password, string salt);
     }
 }
