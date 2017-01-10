@@ -32,8 +32,6 @@ using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
 using System.IO;
 using System.IO.Compression;
-using MediaStash.Lib.Models;
-using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Lib.Providers
 {
@@ -101,7 +99,7 @@ namespace Fitcode.MediaStash.Lib.Providers
             return UnpackAsync(new MemoryStream(buffer)).Result;
         }
 
-        public Task<MediaContainer> UnpackAsync(MemoryStream stream)
+        public async Task<MediaContainer> UnpackAsync(MemoryStream stream)
         {
             var container = new MediaContainer();
             var media = new List<GenericMedia>();
@@ -114,7 +112,12 @@ namespace Fitcode.MediaStash.Lib.Providers
                     {
                         using (var tempStream = entry.Open())
                         {
-                            media.Add(new GenericMedia(entry.FullName, tempStream.ToByteArray()));
+                            using (var destinationStream = new MemoryStream())
+                            {
+                                await tempStream.CopyToAsync(destinationStream);
+                                
+                                media.Add(new GenericMedia(entry.FullName, destinationStream.ToArray()));
+                            }
                         }
                     }
                 }
@@ -129,7 +132,7 @@ namespace Fitcode.MediaStash.Lib.Providers
                 stream = null;
             }
 
-            return Task.FromResult(container);
+            return container;
         }
 
         public async Task<MediaContainer> UnpackAsync(byte[] buffer)

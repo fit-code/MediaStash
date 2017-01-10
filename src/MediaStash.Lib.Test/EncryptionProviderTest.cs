@@ -45,8 +45,6 @@ namespace MediaStash.Lib.Test
 
         private static string _filename = "anime16.jpg";
         private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
-        private static string _encryptedPath = "";
-        private static string _decryptedPath = "";
 
         [SetUp]
         public void Init()
@@ -62,6 +60,10 @@ namespace MediaStash.Lib.Test
         [TearDown]
         public void Cleanup()
         {
+            //if (File.Exists($"{_filePath}{_filename}{_encryptionConfiguration.EncryptionExtension}"))
+            //    File.Delete($"{_filePath}{_filename}{_encryptionConfiguration.EncryptionExtension}");
+            //if (File.Exists($"{_filePath}decrypted-{_filename}"))
+            //    File.Delete($"{_filePath}decrypted-{_filename}"); 
         }
 
         [Test]
@@ -71,7 +73,7 @@ namespace MediaStash.Lib.Test
             {
                 Media = new List<GenericMedia>
                 {
-                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray())
+                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true))
                 }
             };
 
@@ -95,7 +97,7 @@ namespace MediaStash.Lib.Test
                 Media = new List<GenericMedia>
                 {
                     new GenericMedia($"{_filename}{_encryptionConfiguration.EncryptionExtension}", 
-                        new FileStream($"{_filePath}{_filename}{_encryptionConfiguration.EncryptionExtension}", FileMode.Open).ToByteArray())
+                        new FileStream($"{_filePath}{_filename}{_encryptionConfiguration.EncryptionExtension}", FileMode.Open).ToByteArray(true))
                 }
             };
 

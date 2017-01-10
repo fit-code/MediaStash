@@ -25,7 +25,7 @@
 
 using System.IO;
 
-namespace MediaStash.Lib.Models
+namespace Fitcode.MediaStash.Lib.Models
 {
     public abstract class PackBase<T> where T : Stream
     {

@@ -23,9 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib;
+using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Models;
+using Fitcode.MediaStash.Lib.Providers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,5 +40,67 @@ namespace MediaStash.Lib.Test
     [TestFixture]
     public class CompressionProviderTest
     {
+        private static ICompressionProvider _compressionProvider;
+        private static ICompressionConfiguration _compressionConfiguration;
+
+        private static string _filename = "anime16.jpg";
+        private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
+
+        [SetUp]
+        public void Init()
+        {
+            _compressionConfiguration = new CompressionConfiguration();
+            _compressionProvider = new CompressionProvider(_compressionConfiguration);
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            //if (File.Exists($"{_filePath}packed{Path.GetFileName(_filename)}.zip"))
+            //    File.Delete($"{_filePath}packed{Path.GetFileName(_filename)}.zip");
+            //if (File.Exists($"{_filePath}unpacked-{_filename}"))
+            //    File.Delete($"{_filePath}unpacked-{_filename}");
+        }
+
+        [Test]
+        public static void TestContainerCompression()
+        {
+            var container = new MediaContainer
+            {
+                Media = new List<GenericMedia>
+                {
+                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true))
+                }
+            };
+
+            var package = _compressionProvider.Pack($"packed{Path.GetFileName(_filename)}.zip", container);
+
+            using (var writer = new FileStream($"{_filePath}{package.Name}", FileMode.OpenOrCreate))
+            {
+                var data = package.Package.ToArray();
+
+                writer.Write(data, 0, data.Length);
+            }
+
+            Assert.IsTrue(File.Exists($"{_filePath}{package.Name}"));
+        }
+
+        [Test]
+        public static void TestContainerUnpacking()
+        {
+            var mediaContainer = _compressionProvider.Unpack(new FileStream($"{_filePath}packed{Path.GetFileName(_filename)}.zip", FileMode.Open).ToByteArray(true));
+
+            foreach (var media in mediaContainer.Media)
+            {
+                using (var writer = new FileStream($"{_filePath}unpacked-{media.Name}", FileMode.OpenOrCreate))
+                {
+                    var data = media.Data;
+
+                    writer.Write(data, 0, data.Length);
+                }
+
+                Assert.IsTrue(File.Exists($"{_filePath}unpacked-{media.Name}"));
+            }
+        }
     }
 }

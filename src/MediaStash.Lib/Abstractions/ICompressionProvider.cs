@@ -25,7 +25,6 @@
 
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
-using MediaStash.Lib.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
