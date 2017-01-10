@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MediaStash.Lib</id>
+    <version>$version$</version>
+    <title>MediaStash.Lib</title>
+    <authors>Felipe Ramos</authors>
+    <owners>Fitcode.io</owners>
+    <licenseUrl>https://raw.githubusercontent.com/fit-code/MediaStash/master/License</licenseUrl>
+    <projectUrl>https://github.com/fit-code/MediaStash</projectUrl>
+    <iconUrl>http://fitcode.io/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright Fitcode.io 2017</copyright>
+    <tags>Media, Images, Compression, Encryption</tags>
+  </metadata>
+</package>
