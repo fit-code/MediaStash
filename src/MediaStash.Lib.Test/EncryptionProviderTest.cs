@@ -43,6 +43,11 @@ namespace MediaStash.Lib.Test
         private static IEncryptionConfiguration _encryptionConfiguration;
         private static IEncryptionProvider _encryptionProvider;
 
+        private static string _filename = "anime16.jpg";
+        private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
+        private static string _encryptedPath = "";
+        private static string _decryptedPath = "";
+
         [SetUp]
         public void Init()
         {
@@ -66,20 +71,20 @@ namespace MediaStash.Lib.Test
             {
                 Media = new List<GenericMedia>
                 {
-                    new GenericMedia("anime16.jpg", new FileStream(@"C:\Users\felip_kw0ekdh\Desktop\anime16.jpg", FileMode.Open).ToByteArray())
+                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray())
                 }
             };
 
             _encryptionProvider.Encrypt(container);
 
-            using (var writer = new FileStream($@"C:\Users\felip_kw0ekdh\Desktop\{container.Media.FirstOrDefault().Name}", FileMode.OpenOrCreate))
+            using (var writer = new FileStream($"{_filePath}{container.Media.FirstOrDefault().Name}", FileMode.OpenOrCreate))
             {
                 var data = container.Media.FirstOrDefault().Data;
 
                 writer.Write(data, 0, data.Length);
             }
 
-            Assert.IsTrue(File.Exists($@"C:\Users\felip_kw0ekdh\Desktop\{container.Media.FirstOrDefault().Name}"));
+            Assert.IsTrue(File.Exists($"{_filePath}{container.Media.FirstOrDefault().Name}"));
         }
 
         [Test]
@@ -89,20 +94,21 @@ namespace MediaStash.Lib.Test
             {
                 Media = new List<GenericMedia>
                 {
-                    new GenericMedia("anime16.jpg.sec", new FileStream(@"C:\Users\felip_kw0ekdh\Desktop\anime16.jpg.sec", FileMode.Open).ToByteArray())
+                    new GenericMedia($"{_filename}{_encryptionConfiguration.EncryptionExtension}", 
+                        new FileStream($"{_filePath}{_filename}{_encryptionConfiguration.EncryptionExtension}", FileMode.Open).ToByteArray())
                 }
             };
 
             _encryptionProvider.Decrypt(container);
 
-            using (var writer = new FileStream($@"C:\Users\felip_kw0ekdh\Desktop\decrypted-{container.Media.FirstOrDefault().Name}", FileMode.OpenOrCreate))
+            using (var writer = new FileStream($"{_filePath}decrypted-{container.Media.FirstOrDefault().Name}", FileMode.OpenOrCreate))
             {
                 var data = container.Media.FirstOrDefault().Data;
 
                 writer.Write(data, 0, data.Length);
             }
 
-            Assert.IsTrue(File.Exists($@"C:\Users\felip_kw0ekdh\Desktop\decrypted-{container.Media.FirstOrDefault().Name}"));
+            Assert.IsTrue(File.Exists($"{_filePath}decrypted-{container.Media.FirstOrDefault().Name}"));
         }
     }
 }

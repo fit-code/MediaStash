@@ -37,18 +37,46 @@ namespace Fitcode.MediaStash.Lib.Abstractions
     {
         IEncryptionConfiguration Config { get; }
 
+        /// <summary>
+        /// Generic encryption for byte[] for alternative file sources.
+        /// </summary>
+        /// <param name="data">byte[]</param>
+        /// <returns>encrypted byte[]</returns>
+        Task<byte[]> EncryptAsync(byte[] data);
+
         Task EncryptAsync(MediaContainer mediaContainer);
         Task EncryptAsync(MemoryMediaContainer memoryMediaContainer);
         Task EncryptAsync(IEnumerable<IMedia> mediaCollection);
+
+        /// <summary>
+        /// Generic encryption for byte[] for alternative file sources.
+        /// </summary>
+        /// <param name="data">byte[]</param>
+        /// <returns>encrypted byte[]</returns>
+        byte[] Encrypt(byte[] data);
 
         void Encrypt(MediaContainer mediaContainer);
         void Encrypt(MemoryMediaContainer memoryMediaContainer);
         void Encrypt(IEnumerable<IMedia> mediaCollection);
 
+        /// <summary>
+        /// Generic decryptor with no concept of type.
+        /// </summary>
+        /// <param name="data">encrypted byte[]</param>
+        /// <returns>decrypted byte[]</returns>
+        Task<byte[]> DecryptAsync(byte[] data);
         Task DecryptAsync(MediaContainer mediaContainer);
         Task DecryptAsync(IEnumerable<IMedia> mediaCollection);
 
+        /// <summary>
+        /// Generic decryptor with no concept of type.
+        /// </summary>
+        /// <param name="data">encrypted byte[]</param>
+        /// <returns>decrypted byte[]</returns>
+        byte[] Decrypt(byte[] data);
+
         void Decrypt(MediaContainer mediaContainer);
         void Decrypt(IEnumerable<IMedia> mediaCollection);
+
     }
 }

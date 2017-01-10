@@ -74,6 +74,25 @@ namespace Fitcode.MediaStash.Lib.Providers
             EncryptAsync(mediaContainer.Media).Wait();
         }
 
+        public byte[] Encrypt(byte[] data)
+        {
+            return EncryptAsync(data).Result;
+        }
+
+        public async Task<byte[]> EncryptAsync(byte[] data)
+        {
+            using (var encryptedStream = new MemoryStream())
+            {
+                using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _encryptor, CryptoStreamMode.Write))
+                {
+                    await cryptoStream.WriteAsync(data, 0, data.Length);
+                    cryptoStream.FlushFinalBlock();
+
+                    return encryptedStream.ToArray();
+                }
+            }
+        }
+
         public async Task EncryptAsync(IEnumerable<IMedia> mediaCollection)
         {
             foreach (var media in mediaCollection) {
@@ -125,6 +144,26 @@ namespace Fitcode.MediaStash.Lib.Providers
                     }
                 }
             }
+        }
+
+        public async Task<byte[]> DecryptAsync(byte[] encrypted)
+        {
+            var buffer = new byte[encrypted.Length];
+
+            using (var encryptedStream = new MemoryStream(encrypted))
+            {
+                using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _decryptor, CryptoStreamMode.Read))
+                {
+                    await cryptoStream.ReadAsync(buffer, 0, buffer.Length);
+                }
+            }
+
+            return buffer;
+        }
+
+        public byte[] Decrypt(byte[] encrypted)
+        {
+            return DecryptAsync(encrypted).Result;
         }
 
         public void Decrypt(MediaContainer mediaContainer)
