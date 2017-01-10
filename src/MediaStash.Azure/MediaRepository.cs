@@ -50,12 +50,12 @@ namespace Fitcode.MediaStash.Azure
 
         public IRepositoryConfiguration Config { get; private set; }
 
-        public async Task StashContainer(IMediaContainer mediaContainer)
+        public async Task StashContainerAsync(IMediaContainer mediaContainer)
         {
-            await StashContainer(mediaContainer, Config.RootContainer);
+            await StashContainerAsync(mediaContainer, Config.RootContainer);
         }
 
-        public async Task StashContainer(IMediaContainer mediaContainer, string storageContainer)
+        public async Task StashContainerAsync(IMediaContainer mediaContainer, string storageContainer)
         {
             CloudBlobContainer rootContainer = _blobClient.GetContainerReference(storageContainer);
 
@@ -66,6 +66,8 @@ namespace Fitcode.MediaStash.Azure
                     CloudBlockBlob blob = rootContainer.GetBlockBlobReference($@"{mediaContainer.Path}\{file.Name}");
 
                     await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
+
+                    file.Uri = blob.Uri.ToString();
                 }
             }
             else
@@ -74,26 +76,26 @@ namespace Fitcode.MediaStash.Azure
             }
         }
 
-        public async Task StashMedia(string path, IEnumerable<IMedia> mediaCollection)
+        public async Task StashMediaAsync(string path, IEnumerable<IMedia> mediaCollection)
         {
-            await StashMedia(path, Config.RootContainer, mediaCollection);
+            await StashMediaAsync(path, Config.RootContainer, mediaCollection);
         }
 
-        public async Task StashMedia(string path, string storageContainer, IEnumerable<IMedia> mediaCollection)
+        public async Task StashMediaAsync(string path, string storageContainer, IEnumerable<IMedia> mediaCollection)
         {
-            await StashContainer(new MediaContainer
+            await StashContainerAsync(new MediaContainer
             {
                 Path = path,
                 Media = mediaCollection.Select(s => new GenericMedia(s.Name, s.Data)).AsEnumerable()
             }, storageContainer);
         }
 
-        public async Task<IMediaContainer> GetMediaContainer(string path)
+        public async Task<IMediaContainer> GetMediaContainerAsync(string path, bool loadResourcePathOnly = false)
         {
-            return await GetMediaContainer(path, Config.RootContainer);
+            return await GetMediaContainerAsync(path, Config.RootContainer, loadResourcePathOnly);
         }
 
-        public async Task<IMediaContainer> GetMediaContainer(string path, string storageContainer)
+        public async Task<IMediaContainer> GetMediaContainerAsync(string path, string storageContainer, bool loadResourcePathOnly)
         {
             CloudBlobContainer rootContainer = _blobClient.GetContainerReference(storageContainer);
 
@@ -113,11 +115,25 @@ namespace Fitcode.MediaStash.Azure
                     if (item.GetType() == typeof(CloudBlockBlob))
                     {
                         CloudBlockBlob blockBlob = item as CloudBlockBlob;
-                        var file = new MemoryStream();
 
-                        await blockBlob.DownloadToStreamAsync(file);
+                        if (loadResourcePathOnly)
+                        {
+                            media.Add(new MemoryStreamMedia(Path.GetFileName(blockBlob.Name), null)
+                            {
+                                Uri = blockBlob.Uri.ToString()
+                            });
+                        }
+                        else
+                        {
+                            var file = new MemoryStream();
 
-                        media.Add(new MemoryStreamMedia(Path.GetFileName(blockBlob.Name), file));
+                            await blockBlob.DownloadToStreamAsync(file);
+
+                            media.Add(new MemoryStreamMedia(Path.GetFileName(blockBlob.Name), file)
+                            {
+                                Uri = blockBlob.Uri.ToString()
+                            });
+                        }
                     }
                 }
 
@@ -131,14 +147,14 @@ namespace Fitcode.MediaStash.Azure
             }
         }
 
-        public Task<IEnumerable<IMedia>> GetMedia(string path)
+        public Task<IEnumerable<IMedia>> GetMediaAsync(string path, bool loadResourcePathOnly = false)
         {
-            return GetMedia(path, Config.RootContainer);
+            return GetMediaAsync(path, Config.RootContainer, loadResourcePathOnly);
         }
 
-        public async Task<IEnumerable<IMedia>> GetMedia(string path, string storageContainer)
+        public async Task<IEnumerable<IMedia>> GetMediaAsync(string path, string storageContainer, bool loadResourcePathOnly)
         {
-            return (await GetMediaContainer(path, storageContainer))?.Media;
+            return (await GetMediaContainerAsync(path, storageContainer, loadResourcePathOnly))?.Media;
         }
     }
 }

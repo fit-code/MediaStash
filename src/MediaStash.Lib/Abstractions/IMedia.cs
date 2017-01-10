@@ -34,7 +34,7 @@ namespace Fitcode.MediaStash.Lib.Abstractions
     public interface IMedia
     {
         string Name { get; set; }
-        string Uri { get; }
+        string Uri { get; set; }
         byte[] Data { get; set; }
         string ToBase64String(); 
     }

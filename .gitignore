@@ -39,8 +39,10 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 storage_connection.txt
+StorageConnection.cs
 Web.Debug.config
 Web.Release.config
+nuget.exe
 
 # Directories potentially created on remote AFP share
 .AppleDB

@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{71E157E9-7D94-43AF-9C82-6CAE9E79BBB2}"
-	ProjectSection(SolutionItems) = preProject
-		Fitcode.MediaStash.Azure.Test\storage_connection.txt = Fitcode.MediaStash.Azure.Test\storage_connection.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaStash.Lib", "src\MediaStash.Lib\MediaStash.Lib.csproj", "{194190E8-BE0B-4914-A044-B4A5C5B7D555}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaStash.Azure", "src\MediaStash.Azure\MediaStash.Azure.csproj", "{604A92CE-81C5-4AEA-887C-FC650A7D6337}"

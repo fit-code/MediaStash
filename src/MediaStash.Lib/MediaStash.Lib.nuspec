@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Lib</id>
-    <version>$version$</version>
+    <version>1.0.1</version>
     <title>MediaStash.Lib</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -11,7 +11,7 @@
     <iconUrl>http://fitcode.io/</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Updates to IMediaRepository: added flag to only load resource path instead of download file everytime.</releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>
     <tags>Media, Images, Compression, Encryption</tags>
   </metadata>
