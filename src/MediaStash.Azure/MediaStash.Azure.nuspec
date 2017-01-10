@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Azure</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>MediaStash.Azure</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -11,7 +11,7 @@
     <iconUrl>http://fitcode.io/</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Extends the MediaStash.Lib and provides Azure integration.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>Patch for loading files.</releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>
     <tags>Media, Images, Compression, Encryption, Azure, Storage</tags>
 

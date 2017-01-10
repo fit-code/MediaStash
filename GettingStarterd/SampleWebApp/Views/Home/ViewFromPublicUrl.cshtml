@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Fitcode.MediaStash.Lib.Abstractions.IMedia>
+@{
+    ViewBag.Title = "ViewFromPublicUrl";
+}
+
+
+<h2>View From PublicUrl</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var media in Model)
+        {
+            <div class="col-lg-2">
+                <img src="@media.Uri" style="width: auto;height: auto;max-width: 100%;max-height: 100%;" />
+            </div>
+        }
+    </div>
+</div>
+

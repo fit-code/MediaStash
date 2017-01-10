@@ -104,11 +104,11 @@ namespace Fitcode.MediaStash.Azure
                 string prefix = $@"{path.Replace(@"\", "/")}/";
 
                 BlobResultSegment segment = await rootContainer.ListBlobsSegmentedAsync(prefix, new BlobContinuationToken());
-                var container = new MemoryMediaContainer
+                var container = new MediaContainer
                 {
                     Path = path
                 };
-                var media = new List<MemoryStreamMedia>();
+                var media = new List<GenericMedia>();
 
                 foreach (IListBlobItem item in segment.Results)
                 {
@@ -118,21 +118,22 @@ namespace Fitcode.MediaStash.Azure
 
                         if (loadResourcePathOnly)
                         {
-                            media.Add(new MemoryStreamMedia(Path.GetFileName(blockBlob.Name), null)
+                            media.Add(new GenericMedia(Path.GetFileName(blockBlob.Name), data: null)
                             {
                                 Uri = blockBlob.Uri.ToString()
                             });
                         }
                         else
                         {
-                            var file = new MemoryStream();
-
-                            await blockBlob.DownloadToStreamAsync(file);
-
-                            media.Add(new MemoryStreamMedia(Path.GetFileName(blockBlob.Name), file)
+                            using (var file = new MemoryStream())
                             {
-                                Uri = blockBlob.Uri.ToString()
-                            });
+                                await blockBlob.DownloadToStreamAsync(file);
+
+                                media.Add(new GenericMedia(Path.GetFileName(blockBlob.Name), file.ToArray())
+                                {
+                                    Uri = blockBlob.Uri.ToString()
+                                });
+                            }
                         }
                     }
                 }
