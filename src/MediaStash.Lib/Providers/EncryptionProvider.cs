@@ -43,16 +43,20 @@ namespace Fitcode.MediaStash.Lib.Providers
 
         private RijndaelManaged _rijndaelManaged = new RijndaelManaged
         {
-            Mode = CipherMode.ECB
+            Mode = CipherMode.ECB,
+            Padding = PaddingMode.PKCS7
         };
         private readonly ICryptoTransform _encryptor, _decryptor;
 
         public EncryptionProvider(IEncryptionConfiguration config)
         {
             Config = config;
+            
+            _rijndaelManaged.Key = config.GetKeyBytes;
+            _rijndaelManaged.GenerateIV();
 
-            _encryptor = _rijndaelManaged.CreateEncryptor(config.GetKeyBytes, new byte[] { });
-            _decryptor = _rijndaelManaged.CreateDecryptor(config.GetKeyBytes, new byte[] { });
+            _encryptor = _rijndaelManaged.CreateEncryptor();
+            _decryptor = _rijndaelManaged.CreateDecryptor();
         }
         
         public void Encrypt(IEnumerable<IMedia> mediaCollection)
@@ -78,10 +82,12 @@ namespace Fitcode.MediaStash.Lib.Providers
                     using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _encryptor, CryptoStreamMode.Write))
                     {
                         await cryptoStream.WriteAsync(media.Data, 0, media.Data.Length);
-                    }
+                        cryptoStream.FlushFinalBlock();
 
-                    media.Name = $"{media.Name}.{Config.EncryptionExtension}";
-                    media.Data = encryptedStream.ToByteArray();
+
+                        media.Name = $"{media.Name}{Config.EncryptionExtension}";
+                        media.Data = encryptedStream.ToArray();
+                    }
                 }
             }
         }
@@ -101,21 +107,24 @@ namespace Fitcode.MediaStash.Lib.Providers
             await DecryptAsync(mediaContainer.Media);
         }
 
-        public Task DecryptAsync(IEnumerable<IMedia> mediaCollection)
+        public async Task DecryptAsync(IEnumerable<IMedia> mediaCollection)
         {
             foreach (var media in mediaCollection)
             {
-                using (var encryptedStream = new MemoryStream())
+                using (var encryptedStream = new MemoryStream(media.Data))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _encryptor, CryptoStreamMode.Read))
+                    using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _decryptor, CryptoStreamMode.Read))
                     {
-                        media.Data = cryptoStream.ToByteArray();
-                        media.Name = media.Name.Replace($".{Config.EncryptionExtension}", string.Empty);
+                        var buffer = new byte[media.Data.Length];
+
+                        await cryptoStream.ReadAsync(buffer, 0, buffer.Length);
+
+
+                        media.Data = buffer;
+                        media.Name = media.Name.Replace($"{Config.EncryptionExtension}", string.Empty);
                     }
                 }
             }
-
-            return Task.FromResult(0);
         }
 
         public void Decrypt(MediaContainer mediaContainer)

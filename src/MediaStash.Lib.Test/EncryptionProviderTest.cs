@@ -25,10 +25,12 @@
 
 using Fitcode.MediaStash.Lib;
 using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Providers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +40,8 @@ namespace MediaStash.Lib.Test
     [TestFixture]
     public class EncryptionProviderTest
     {
-        private IEncryptionConfiguration _encryptionConfiguration;
-        private IEncryptionProvider _encryptionProvider;
+        private static IEncryptionConfiguration _encryptionConfiguration;
+        private static IEncryptionProvider _encryptionProvider;
 
         [SetUp]
         public void Init()
@@ -53,12 +55,54 @@ namespace MediaStash.Lib.Test
         }
 
         [TearDown]
-        public void Cleanup() { }
+        public void Cleanup()
+        {
+        }
 
         [Test]
-        public static void Test()
+        public static void TestImageEncryption()
         {
+            var container = new MediaContainer
+            {
+                Media = new List<GenericMedia>
+                {
+                    new GenericMedia("anime16.jpg", new FileStream(@"C:\Users\felip_kw0ekdh\Desktop\anime16.jpg", FileMode.Open).ToByteArray())
+                }
+            };
 
+            _encryptionProvider.Encrypt(container);
+
+            using (var writer = new FileStream($@"C:\Users\felip_kw0ekdh\Desktop\{container.Media.FirstOrDefault().Name}", FileMode.OpenOrCreate))
+            {
+                var data = container.Media.FirstOrDefault().Data;
+
+                writer.Write(data, 0, data.Length);
+            }
+
+            Assert.IsTrue(File.Exists($@"C:\Users\felip_kw0ekdh\Desktop\{container.Media.FirstOrDefault().Name}"));
+        }
+
+        [Test]
+        public static void TestImageDecryption()
+        {
+            var container = new MediaContainer
+            {
+                Media = new List<GenericMedia>
+                {
+                    new GenericMedia("anime16.jpg.sec", new FileStream(@"C:\Users\felip_kw0ekdh\Desktop\anime16.jpg.sec", FileMode.Open).ToByteArray())
+                }
+            };
+
+            _encryptionProvider.Decrypt(container);
+
+            using (var writer = new FileStream($@"C:\Users\felip_kw0ekdh\Desktop\decrypted-{container.Media.FirstOrDefault().Name}", FileMode.OpenOrCreate))
+            {
+                var data = container.Media.FirstOrDefault().Data;
+
+                writer.Write(data, 0, data.Length);
+            }
+
+            Assert.IsTrue(File.Exists($@"C:\Users\felip_kw0ekdh\Desktop\decrypted-{container.Media.FirstOrDefault().Name}"));
         }
     }
 }

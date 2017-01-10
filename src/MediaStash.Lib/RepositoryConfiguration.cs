@@ -59,7 +59,7 @@ namespace Fitcode.MediaStash.Lib
             {
                 if (_passwordDeriveBytes == null)
                 {
-                    byte[] salt = new byte[0];
+                    byte[] salt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
                     if (!string.IsNullOrEmpty(Salt))
                         salt = Encoding.ASCII.GetBytes(Salt);
 
@@ -74,7 +74,7 @@ namespace Fitcode.MediaStash.Lib
         {
             get
             {
-                return PasswordDeriveBytes.GetBytes(256);
+                return PasswordDeriveBytes.GetBytes(256 / 8);
             }
         }
 
