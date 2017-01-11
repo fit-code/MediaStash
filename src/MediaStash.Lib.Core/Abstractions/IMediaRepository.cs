@@ -43,7 +43,7 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// </summary>
         /// <param name="mediaContainer">Media Container</param>
         /// <returns>Task.Completed unless exception is thrown.</returns>
-        Task StashContainer(IMediaContainer mediaContainer);
+        Task StashContainerAsync(IMediaContainer mediaContainer);
 
         /// <summary>
         /// Store a collection of media elements grouped by container.
@@ -51,7 +51,7 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <param name="mediaContainer">Media Container</param>
         /// <param name="storageContainer">Overrides configuration root container.</param>
         /// <returns>Task.Completed unless exception is thrown.</returns>
-        Task StashContainer(IMediaContainer mediaContainer, string storageContainer);
+        Task StashContainerAsync(IMediaContainer mediaContainer, string storageContainer);
 
         /// <summary>
         /// Store a collection of media passed as IEnumerable.
@@ -59,7 +59,7 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <param name="path">Path travelled from root container.</param>
         /// <param name="mediaCollection">IEnumerable of IMedia contract.</param>
         /// <returns>Task.Completed unless exception is thrown.</returns>
-        Task StashMedia(string path, IEnumerable<IMedia> mediaCollection);
+        Task StashMediaAsync(string path, IEnumerable<IMedia> mediaCollection);
 
         /// <summary>
         /// Store a collection of media passed as IEnumerable.
@@ -68,14 +68,14 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <param name="storageContainer">Overrides configuration root container.</param>
         /// <param name="mediaCollection">IEnumerable of IMedia contract.</param>
         /// <returns>Task.Completed unless exception is thrown.</returns> 
-        Task StashMedia(string path, string storageContainer, IEnumerable<IMedia> mediaCollection);
+        Task StashMediaAsync(string path, string storageContainer, IEnumerable<IMedia> mediaCollection);
 
         /// <summary>
         /// Create and return media container found at passed path.
         /// </summary>
         /// <param name="path">Path travelled from root container.</param>
         /// <returns>Concrete IMediaContainer implementation <see cref="Models.MemoryStreamMedia"/></returns>
-        Task<IMediaContainer> GetMediaContainer(string path);
+        Task<IMediaContainer> GetMediaContainerAsync(string path, bool loadResourcePathOnly = false);
 
         /// <summary>
         /// Create and return media container found at passed path.
@@ -83,21 +83,23 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <param name="path">Path travelled from root container.</param>
         /// <param name="storageContainer">Overrides configuration root container.</param>
         /// <returns>Concrete IMediaContainer implementation <see cref="Models.MemoryStreamMedia"/></returns>
-        Task<IMediaContainer> GetMediaContainer(string path, string storageContainer);
+        Task<IMediaContainer> GetMediaContainerAsync(string path, string storageContainer, bool loadResourcePathOnly);
 
         /// <summary>
         /// Return IEnumerable of IMedia found at passed path.
         /// </summary>
         /// <param name="path">Path travelled from root container.</param>
+        /// <param name="loadResourcePathOnly">Flag used for public containers so we don't download file, just grab the path.</param>
         /// <returns>Collection of IMedia <see cref="Models.MemoryStreamMedia"/></returns>
-        Task<IEnumerable<IMedia>> GetMedia(string path);
+        Task<IEnumerable<IMedia>> GetMediaAsync(string path, bool loadResourcePathOnly = false);
 
         /// <summary>
         /// Return IEnumerable of IMedia found at passed path.
         /// </summary>
         /// <param name="path">Path travelled from root container.</param>
+        /// <param name="loadResourcePathOnly">Flag used for public containers so we don't download file, just grab the path.</param>
         /// <param name="storageContainer">Overrides configuration root container.</param>
         /// <returns>Collection of IMedia <see cref="Models.MemoryStreamMedia"/></returns>
-        Task<IEnumerable<IMedia>> GetMedia(string path, string storageContainer);
+        Task<IEnumerable<IMedia>> GetMediaAsync(string path, string storageContainer, bool loadResourcePathOnly);
     }
 }

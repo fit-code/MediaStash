@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MediaStash.Azure.Core</id>
+    <version>1.0.0</version>
+    <title>MediaStash.Azure.Core</title>
+    <authors>Felipe Ramos</authors>
+    <owners>Fitcode.io</owners>
+    <licenseUrl>https://raw.githubusercontent.com/fit-code/MediaStash/master/License</licenseUrl>
+    <projectUrl>https://github.com/fit-code/MediaStash</projectUrl>
+    <iconUrl>http://fitcode.io/images/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extends the MediaStash.Lib and provides Azure integration.</description>
+    <releaseNotes>Release</releaseNotes>
+    <copyright>Copyright Fitcode.io 2017</copyright>
+    <tags>Media, Images, Compression, Encryption, Azure, Storage</tags>
+    <dependencies>
+      <dependency id="MediaStash.Lib.Core" version="1.0.0" />
+      <dependency id="WindowsAzure.Storage" version="8.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Debug\netstandard1.6\*.dll" target="lib\netstandard1.6\" />
+    <file src="bin\Debug\netstandard1.6\*.pdb" target="lib\netstandard1.6\" />
+  </files>
+</package>

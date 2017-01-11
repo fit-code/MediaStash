@@ -23,12 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
 using System.IO;
 using System.Security.Cryptography;
+using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Lib.Providers
 {
@@ -43,7 +47,8 @@ namespace Fitcode.MediaStash.Lib.Providers
         public EncryptionProvider(IEncryptionConfiguration config)
         {
             Config = config;
-            
+
+            _aes.Padding = PaddingMode.PKCS7;
             _aes.Key = config.GetKeyBytes;
             _aes.GenerateIV();
 
