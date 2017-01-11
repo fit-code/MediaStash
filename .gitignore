@@ -52,3 +52,4 @@ Temporary Items
 .apdisk
 packages
 bin
+obj\Debug
