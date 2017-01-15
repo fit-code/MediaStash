@@ -48,7 +48,40 @@ namespace Fitcode.MediaStash.Azure
             _blobClient = _storageAccount.CreateCloudBlobClient();
         }
 
+        public MediaRepository(IRepositoryConfiguration config, IEnumerable<IProvider> providers) : this(config)
+        {
+            this.Providers = providers;
+        }
+
         public IRepositoryConfiguration Config { get; private set; }
+        public IEnumerable<IProvider> Providers { get; private set; }
+
+        public async Task RunProviderProcess(IMedia media)
+        {
+            if (media.Metadata == null)
+                media.Metadata = new Dictionary<string, string>();
+
+            if (Providers != null && Providers.Count() > 0)
+            {
+                foreach (var provider in Providers)
+                {
+                    media.Data = await provider.ProcessAsync(media.Data);
+                    media.Metadata.Add(provider.GetType().Name, provider.GetType().FullName);
+                }
+            }
+        }
+
+        public async Task ReverseProvider(IMedia media)
+        {
+            if (Providers != null && Providers.Count() > 0)
+            {
+                foreach (var provider in Providers.Reverse()) // We wan't to reverse for the correct processing order
+                {
+                    if (media.Metadata.ContainsKey(provider.GetType().Name))
+                        media.Data = await provider.ReverseAsync(media.Data);
+                }
+            }
+        }
 
         public async Task StashContainerAsync(IMediaContainer mediaContainer)
         {
@@ -64,6 +97,15 @@ namespace Fitcode.MediaStash.Azure
                 foreach (var file in mediaContainer.Media)
                 {
                     CloudBlockBlob blob = rootContainer.GetBlockBlobReference($@"{mediaContainer.Path}\{file.Name}");
+
+                    await RunProviderProcess(file);
+
+                    // Append metadata
+                    if (blob.Metadata != null && file.Metadata.Count > 0)
+                    {
+                        foreach (KeyValuePair<string, string> entry in file.Metadata)
+                            blob.Metadata.Add(entry);
+                    }
 
                     await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
 
@@ -129,10 +171,21 @@ namespace Fitcode.MediaStash.Azure
                             {
                                 await blockBlob.DownloadToStreamAsync(file);
 
-                                media.Add(new GenericMedia(Path.GetFileName(blockBlob.Name), file.ToArray())
+                                var mediaFile = new GenericMedia(Path.GetFileName(blockBlob.Name), file.ToArray())
                                 {
-                                    Uri = blockBlob.Uri.ToString()
-                                });
+                                    Uri = blockBlob.Uri.ToString(),
+                                    Metadata = new Dictionary<string, string>()
+                                };
+
+                                if (blockBlob.Metadata != null)
+                                {
+                                    foreach (KeyValuePair<string, string> entry in blockBlob.Metadata)
+                                        mediaFile.Metadata.Add(entry.Key, entry.Value);
+                                }
+
+                                await ReverseProvider(mediaFile);
+
+                                media.Add(mediaFile);
                             }
                         }
                     }

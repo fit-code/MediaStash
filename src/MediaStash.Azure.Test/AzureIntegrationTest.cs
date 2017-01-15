@@ -31,6 +31,7 @@ using Fitcode.MediaStash.Lib;
 using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Azure;
+using Fitcode.MediaStash.Lib.Providers;
 
 namespace MediaStash.Lib.Test
 {
@@ -40,19 +41,26 @@ namespace MediaStash.Lib.Test
         private static IRepositoryConfiguration _repositoryConfiguration;
         private static IMediaRepository _mediaRepository;
 
-        private static string _filename = "anime16.jpg";
+        private static string _filename = "anime17.jpg";
         private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
         private static string _azurePath = "unit-test";
 
         [SetUp]
         public void Init()
         {
-           _repositoryConfiguration = new RepositoryConfiguration
+            _repositoryConfiguration = new RepositoryConfiguration
             {
                 RootContainer = "dev",
                 ConnectionString = Azure.Test.StorageConnection.ConnectionString
             };
-            _mediaRepository = new MediaRepository(_repositoryConfiguration);
+            _mediaRepository = new MediaRepository(_repositoryConfiguration,
+                new List<IProvider>
+                {
+                    new EncryptionProvider(new EncryptionConfiguration {
+                        Password = "test",
+                        EncryptionExtension = ".sec"
+                    })
+                });
         }
 
         [TearDown]
@@ -79,10 +87,13 @@ namespace MediaStash.Lib.Test
         [Test]
         public static void TestMediaDownload()
         {
-            var result = _mediaRepository.GetMediaAsync(_azurePath, true).Result;
+            var result = _mediaRepository.GetMediaAsync(_azurePath, false).Result;
             foreach (var media in result)
             {
-                Assert.IsNull(media.Data);  
+                using (var writer = new FileStream($@"C:\Temp\{media.Name}", FileMode.Create))
+                {
+                    writer.Write(media.Data, 0, media.Data.Length);
+                }  
             }
         }
     }

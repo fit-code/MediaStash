@@ -58,7 +58,31 @@ namespace Fitcode.MediaStash.Lib.Providers
             _encryptor = _rijndaelManaged.CreateEncryptor();
             _decryptor = _rijndaelManaged.CreateDecryptor();
         }
-        
+
+        #region Generic Functionality
+
+        public Task<byte[]> ProcessAsync(byte[] data)
+        {
+            return EncryptAsync(data);
+        }
+
+        public byte[] Process(byte[] data)
+        {
+            return Encrypt(data);
+        }
+
+        public Task<byte[]> ReverseAsync(byte[] data)
+        {
+            return DecryptAsync(data);
+        }
+
+        public byte[] Reverse(byte[] data)
+        {
+            return Decrypt(data);
+        }
+
+        #endregion
+
         public void Encrypt(IEnumerable<IMedia> mediaCollection)
         {
             EncryptAsync(mediaCollection).Wait();

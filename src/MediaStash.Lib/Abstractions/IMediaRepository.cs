@@ -39,6 +39,14 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         IRepositoryConfiguration Config { get; }
 
         /// <summary>
+        /// Providers perform transformations to the content before uploading and directly to the downloaded stream.
+        /// </summary>
+        IEnumerable<IProvider> Providers { get; }
+
+        Task RunProviderProcess(IMedia media);
+        Task ReverseProvider(IMedia media);
+
+        /// <summary>
         /// Store a collection of media elements grouped by container.
         /// </summary>
         /// <param name="mediaContainer">Media Container</param>

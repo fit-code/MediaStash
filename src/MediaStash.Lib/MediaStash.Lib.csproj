@@ -46,7 +46,9 @@
     <Compile Include="Abstractions\IMedia.cs" />
     <Compile Include="Abstractions\IMediaContainer.cs" />
     <Compile Include="Abstractions\IMediaRepository.cs" />
+    <Compile Include="Abstractions\IProvider.cs" />
     <Compile Include="Abstractions\IRepositoryConfiguration.cs" />
+    <Compile Include="Helpers\MimeResolver.cs" />
     <Compile Include="MediaExtensions.cs" />
     <Compile Include="Models\CompressedPack.cs" />
     <Compile Include="Models\GenericMedia.cs" />

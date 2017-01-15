@@ -24,8 +24,11 @@
 #endregion
 
 using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Helpers;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Fitcode.MediaStash.Lib.Models
 {
@@ -34,12 +37,26 @@ namespace Fitcode.MediaStash.Lib.Models
     /// </summary>
     public class GenericMedia : IMedia
     {
+        private string _mime = null;
+
         public byte[] Data { get; set; }
 
         public string Name { get; set; }
         public string Uri { get; set; }
 
-        public bool AutoDisposeOnDataCall { get; set; } = false;
+        public string Mime
+        {
+            get
+            {
+                if (_mime == null)
+                    _mime = MimeResolver.GetMimes(Path.GetExtension(Name)).FirstOrDefault();
+
+                return _mime;
+            }
+            set { _mime = value; }
+        }
+
+        public Dictionary<string, string> Metadata { get; set; }
 
         public GenericMedia(string name, byte[] data)
         {

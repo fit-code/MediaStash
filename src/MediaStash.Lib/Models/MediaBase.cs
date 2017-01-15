@@ -24,10 +24,11 @@
 #endregion
 
 using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Helpers;
 using System;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace Fitcode.MediaStash.Lib.Models
 {
@@ -37,11 +38,25 @@ namespace Fitcode.MediaStash.Lib.Models
     /// <typeparam name="T">Media type template constrained to Stream.</typeparam>
     public abstract class MediaBase<T> : IMedia, IDisposable where T : Stream
     {
+        private string _mime = null;
+
         public string Name { get; set; }
 
         public T Media { get; set; }
 
         public string Uri { get; set; }
+
+        public string Mime
+        {
+            get
+            {
+                if (_mime == null)
+                    _mime = MimeResolver.GetMimes(Path.GetExtension(Name)).FirstOrDefault();
+
+                return _mime;
+            }
+            set { _mime = value; }
+        }
 
         public virtual byte[] Data
         {
@@ -54,6 +69,8 @@ namespace Fitcode.MediaStash.Lib.Models
                 Media.Write(value, 0, value.Length);
             }
         }
+
+        public Dictionary<string, string> Metadata { get; set; }
 
         public MediaBase(string name, T media)
         {

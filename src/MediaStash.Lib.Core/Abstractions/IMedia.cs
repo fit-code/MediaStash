@@ -23,8 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System.IO;
-using System.Threading.Tasks;
+
+using System.Collections.Generic;
 
 namespace Fitcode.MediaStash.Lib.Abstractions
 {
@@ -35,7 +35,9 @@ namespace Fitcode.MediaStash.Lib.Abstractions
     {
         string Name { get; set; }
         string Uri { get; set; }
+        string Mime { get; set; }
         byte[] Data { get; set; }
+        Dictionary<string,string> Metadata { get; set; }
         string ToBase64String(); 
     }
 }
