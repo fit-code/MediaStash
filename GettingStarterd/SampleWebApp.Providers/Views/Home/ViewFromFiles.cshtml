@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Fitcode.MediaStash.Lib.Abstractions.IMedia>
+@{
+    ViewBag.Title = "ViewFromFiles";
+}
+
+<h2>View From Files</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var media in Model)
+        {
+            var base64 = Convert.ToBase64String(media.Data);
+            var imgSrc = String.Format("data:image/base64;base64,{0}", base64);
+
+            <div class="col-lg-2">
+                <img src="@imgSrc" style="width: auto;height: auto;max-width: 100%;max-height: 100%;"  />
+            </div>
+        }
+    </div>
+</div>

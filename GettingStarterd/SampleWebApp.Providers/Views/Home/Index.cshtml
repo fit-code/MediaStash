@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Basic File Upload</h2>
+@using (Html.BeginForm("Index", "Home",
+                                    FormMethod.Post,
+                                    new { enctype = "multipart/form-data" }))
+{
+    <label for="file">Upload Image:</label>
+    <input type="file" name="file" id="file" /><br><br>
+    <input type="submit" value="Upload Image" />
+    <br><br>
+    @ViewBag.Message
+    @ViewBag.UploadPath
+}
+<div>
+    <div>
+        @Html.ActionLink("View From Files", "ViewFromFiles") 
+    </div>
+    <hr />
+    <div>
+        <p>
+            Files will not be visible since they are encrypted. When using providers this will most likely be the case unless using a watermark provider.
+        </p>
+
+        @Html.ActionLink("View From PublicUrl", "ViewFromPublicUrl")
+    </div>
+</div>
