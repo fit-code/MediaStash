@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Lib</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>MediaStash.Lib</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -11,8 +11,12 @@
     <iconUrl>http://fitcode.io/</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</description>
-    <releaseNotes>Updates to IMediaRepository: added flag to only load resource path instead of download file everytime.</releaseNotes>
+    <releaseNotes><![CDATA[
+      -Added generic a generic provider abstraction to facilitate applying transformation to the storage repository. 
+      -Metadata/mimetype (Currently Metadata added to the IMedia types will get persisted to storage when using MediaStash.Azure) 
+      -Contract Updates.
+    ]]></releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>
-    <tags>Media, Images, Compression, Encryption</tags>
+    <tags>Media, Images, Compression, Encryption, ASP.NET, MVC, Storage</tags>
   </metadata>
 </package>
