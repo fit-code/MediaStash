@@ -23,6 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib.Models;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -32,7 +33,9 @@ namespace Fitcode.MediaStash.Lib.Abstractions
     {
         string ConnectionString { get; }
         
-        string RootContainer { get; }  
+        string RootContainer { get; }
+
+        ServiceAccount Account { get; }
     }
 
     public interface ICompressionConfiguration

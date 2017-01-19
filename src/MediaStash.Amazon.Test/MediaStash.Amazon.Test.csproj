@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{194190E8-BE0B-4914-A044-B4A5C5B7D555}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{6EDE2B85-6C32-404F-BA9D-E8B07F171731}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MediaStash.Lib</RootNamespace>
-    <AssemblyName>MediaStash.Lib</AssemblyName>
+    <RootNamespace>MediaStash.Amazon.Test</RootNamespace>
+    <AssemblyName>MediaStash.Amazon.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,7 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,27 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ICompressionProvider.cs" />
-    <Compile Include="Abstractions\IEncryptionProvider.cs" />
-    <Compile Include="Abstractions\IMedia.cs" />
-    <Compile Include="Abstractions\IMediaContainer.cs" />
-    <Compile Include="Abstractions\IMediaRepository.cs" />
-    <Compile Include="Abstractions\IProvider.cs" />
-    <Compile Include="Abstractions\IRepositoryConfiguration.cs" />
-    <Compile Include="Helpers\MimeResolver.cs" />
-    <Compile Include="MediaExtensions.cs" />
-    <Compile Include="Models\CompressedPack.cs" />
-    <Compile Include="Models\GenericMedia.cs" />
-    <Compile Include="Models\MediaBase.cs" />
-    <Compile Include="Models\MediaContainer.cs" />
-    <Compile Include="Models\MemoryMediaContainer.cs" />
-    <Compile Include="Models\MemoryStreamMedia.cs" />
-    <Compile Include="Models\PackBase.cs" />
-    <Compile Include="Models\ServiceAccount.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\CompressionProvider.cs" />
-    <Compile Include="Providers\EncryptionProvider.cs" />
-    <Compile Include="RepositoryConfiguration.cs" />
+    <Compile Include="StorageConnection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediaStash.Amazon\MediaStash.Amazon.csproj">
+      <Project>{ee06290f-5cad-47ef-ad89-d25e4292973c}</Project>
+      <Name>MediaStash.Amazon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MediaStash.Lib\MediaStash.Lib.csproj">
+      <Project>{194190e8-be0b-4914-a044-b4a5c5b7d555}</Project>
+      <Name>MediaStash.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

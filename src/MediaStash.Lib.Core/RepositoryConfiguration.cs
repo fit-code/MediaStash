@@ -23,16 +23,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
 using System.Collections.Generic;
 using Fitcode.MediaStash.Lib.Abstractions;
 using System.Security.Cryptography;
 using System.Text;
+using Fitcode.MediaStash.Lib.Models;
 
 namespace Fitcode.MediaStash.Lib
 {
     public class RepositoryConfiguration : IRepositoryConfiguration
     {
+        public ServiceAccount Account { get; set; }
         public string ConnectionString { get; set; }
 
         public string RootContainer { get; set; }

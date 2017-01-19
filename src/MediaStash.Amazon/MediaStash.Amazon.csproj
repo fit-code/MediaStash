@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{194190E8-BE0B-4914-A044-B4A5C5B7D555}</ProjectGuid>
+    <ProjectGuid>{EE06290F-5CAD-47EF-AD89-D25E4292973C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MediaStash.Lib</RootNamespace>
-    <AssemblyName>MediaStash.Lib</AssemblyName>
+    <RootNamespace>MediaStash.Amazon</RootNamespace>
+    <AssemblyName>MediaStash.Amazon</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK, Version=2.3.55.2, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.2.3.55.2\lib\net45\AWSSDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MediaStash.Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediaStash.Lib.1.0.3\lib\net45\MediaStash.Lib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,27 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ICompressionProvider.cs" />
-    <Compile Include="Abstractions\IEncryptionProvider.cs" />
-    <Compile Include="Abstractions\IMedia.cs" />
-    <Compile Include="Abstractions\IMediaContainer.cs" />
-    <Compile Include="Abstractions\IMediaRepository.cs" />
-    <Compile Include="Abstractions\IProvider.cs" />
-    <Compile Include="Abstractions\IRepositoryConfiguration.cs" />
-    <Compile Include="Helpers\MimeResolver.cs" />
-    <Compile Include="MediaExtensions.cs" />
-    <Compile Include="Models\CompressedPack.cs" />
-    <Compile Include="Models\GenericMedia.cs" />
-    <Compile Include="Models\MediaBase.cs" />
-    <Compile Include="Models\MediaContainer.cs" />
-    <Compile Include="Models\MemoryMediaContainer.cs" />
-    <Compile Include="Models\MemoryStreamMedia.cs" />
-    <Compile Include="Models\PackBase.cs" />
-    <Compile Include="Models\ServiceAccount.cs" />
+    <Compile Include="MediaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\CompressionProvider.cs" />
-    <Compile Include="Providers\EncryptionProvider.cs" />
-    <Compile Include="RepositoryConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

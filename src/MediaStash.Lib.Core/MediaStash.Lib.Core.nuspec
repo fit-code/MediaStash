@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Lib.Core</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>MediaStash.Lib.Core</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -13,9 +13,7 @@
     <description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</description>
     <releaseNotes>
       <![CDATA[
-      -Added generic a generic provider abstraction to facilitate applying transformation to the storage repository. 
-      -Metadata/mimetype (Currently Metadata added to the IMedia types will get persisted to storage when using MediaStash.Azure) 
-      -Contract Updates.
+      Added ServiceAccount to Configuration for AWS Key/Secret support.
     ]]>
     </releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>
