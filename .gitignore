@@ -52,5 +52,5 @@ Temporary Items
 .apdisk
 packages
 bin
-obj\Debug
+obj/
 .vs/

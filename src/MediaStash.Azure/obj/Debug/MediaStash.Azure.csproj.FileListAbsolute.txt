@@ -1,8 +1,0 @@
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\bin\Debug\MediaStash.Azure.dll
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\bin\Debug\MediaStash.Azure.pdb
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\bin\Debug\MediaStash.Lib.dll
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\bin\Debug\Newtonsoft.Json.dll
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\bin\Debug\MediaStash.Lib.pdb
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\obj\Debug\MediaStash.Azure.dll
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\obj\Debug\MediaStash.Azure.pdb
-C:\Users\felip_kw0ekdh\Documents\GitHub\MediaStash\src\MediaStash.Azure\obj\Debug\MediaStash.Azure.csprojResolveAssemblyReference.cache
