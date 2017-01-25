@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="IAmazonMediaRepository.cs" />
     <Compile Include="MediaRepository.cs" />
-    <Compile Include="Models\CloudItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

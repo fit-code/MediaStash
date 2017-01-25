@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "AWSSDK.S3": "3.3.5.3",
+    "MediaStash.Lib.Core": "1.0.2",
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": [ "dnxcore50", "portable-net451+win8" ]
+    }
+  }
+}
