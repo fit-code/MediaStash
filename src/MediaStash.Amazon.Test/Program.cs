@@ -23,11 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Azure;
+using Fitcode.MediaStash.AmazonStorage;
 using Fitcode.MediaStash.Lib;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
 using MediaStash.Amazon.Test;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -36,7 +37,7 @@ namespace MediaStash.Amazon.Core.Test
     public class Program
     {
         private static IRepositoryConfiguration _repositoryConfiguration;
-        private static IMediaRepository _mediaRepository;
+        private static IAmazonMediaRepository _mediaRepository;
 
         private static string _filename = "anime17.jpg";
         private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
@@ -45,7 +46,8 @@ namespace MediaStash.Amazon.Core.Test
         public static void Main(string[] args)
         {
             Init();
-            TestUpload();
+            TestListBucket();
+            //TestUpload();
             TestDownload();
         }
 
@@ -78,6 +80,15 @@ namespace MediaStash.Amazon.Core.Test
             foreach (var media in result)
             {
                 
+            }
+        }
+
+        private static void TestListBucket()
+        {
+            var content = _mediaRepository.ListObjectRequest(_repositoryConfiguration.RootContainer, "unit-test").Result;
+            foreach(var item in content)
+            {
+                Console.WriteLine(item.Key);
             }
         }
     }

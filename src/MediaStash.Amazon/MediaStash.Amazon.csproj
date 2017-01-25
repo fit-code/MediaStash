@@ -7,8 +7,8 @@
     <ProjectGuid>{EE06290F-5CAD-47EF-AD89-D25E4292973C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MediaStash.Amazon</RootNamespace>
-    <AssemblyName>MediaStash.Amazon</AssemblyName>
+    <RootNamespace>MediaStash.AmazonStorage</RootNamespace>
+    <AssemblyName>MediaStash.AmazonStorage</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAmazonMediaRepository.cs" />
     <Compile Include="MediaRepository.cs" />
+    <Compile Include="Models\CloudItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,9 +33,9 @@ using Fitcode.MediaStash.Lib.Abstractions;
 using Amazon.S3;
 using Amazon.S3.Model;
 
-namespace Fitcode.MediaStash.Azure
+namespace Fitcode.MediaStash.AmazonStorage
 {
-    public class MediaRepository : IMediaRepository, IDisposable
+    public class MediaRepository : IAmazonMediaRepository, IDisposable
     {
         private AmazonS3Client _s3Client = null;
 
@@ -149,8 +149,35 @@ namespace Fitcode.MediaStash.Azure
         {
             var prefix = $@"{path.Replace(@"\", "/")}/";
             var files = await ListObjectRequest(storageContainer, prefix);
-            var container = new MediaContainer();
+            var container = new MediaContainer
+            {
+                Path = $"https://s3.amazonaws.com/{storageContainer}/{path}"
+            };
             var media = new List<GenericMedia>();
+
+            // Validate empty/null
+            if (files == null && files.Count() == 0)
+                return container;
+
+            // Only resources path
+            if (loadResourcePathOnly)
+            {
+                foreach (var item in files)
+                {
+                    // Fix for amazon delete/persistance of files.
+                    if (!item.Key.Replace("/", string.Empty).EndsWith(path))
+                    {
+                        media.Add(new GenericMedia(Path.GetFileName(item.Key), data: null)
+                        {
+                            Uri = $"https://s3.amazonaws.com/{storageContainer}/{item.Key}"
+                        });
+                    }
+                }
+
+                container.Media = media;
+
+                return container;
+            }
 
             foreach (var item in files)
             {
