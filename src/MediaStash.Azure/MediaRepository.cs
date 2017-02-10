@@ -32,6 +32,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Azure
 {
@@ -209,6 +210,43 @@ namespace Fitcode.MediaStash.Azure
         public async Task<IEnumerable<IMedia>> GetMediaAsync(string path, string storageContainer, bool loadResourcePathOnly)
         {
             return (await GetMediaContainerAsync(path, storageContainer, loadResourcePathOnly))?.Media;
+        }
+
+        public Task<IDirectoryResult> StashDirectoryAsync(string path, string rootStorageContainer, bool includeSubDirectory = false)
+        {
+            throw new NotImplementedException(); // Needs work.
+
+            if (Directory.Exists(path))
+            {
+                var rootDir = new DirectoryInfo(path);
+                var operations = rootDir.ToOperations();
+
+                if (includeSubDirectory)
+                {
+                    var directories = rootDir.GetDirectories();
+                }
+
+                //CloudBlockBlob blob = rootContainer.GetBlockBlobReference($@"{mediaContainer.Path}\{file.Name}");
+
+                //await RunProviderProcess(file);
+
+                //// Append metadata
+                //if (blob.Metadata != null && file.Metadata.Count > 0)
+                //{
+                //    foreach (KeyValuePair<string, string> entry in file.Metadata)
+                //        blob.Metadata.Add(entry);
+                //}
+
+                //await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
+
+                //file.Uri = blob.Uri.ToString();
+
+                var result = new DirectoryResult(null, rootStorageContainer, null);
+
+                return Task.FromResult<IDirectoryResult>(result);
+            }
+            else
+                throw new InvalidOperationException($"Invalid DirectoryPath: {path}");
         }
     }
 }

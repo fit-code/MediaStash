@@ -50,8 +50,9 @@
     <Compile Include="Abstractions\IProvider.cs" />
     <Compile Include="Abstractions\IRepositoryConfiguration.cs" />
     <Compile Include="Helpers\MimeResolver.cs" />
-    <Compile Include="MediaExtensions.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Models\CompressedPack.cs" />
+    <Compile Include="Models\DirectoryOperation.cs" />
     <Compile Include="Models\DirectoryResult.cs" />
     <Compile Include="Models\GenericMedia.cs" />
     <Compile Include="Models\MediaBase.cs" />

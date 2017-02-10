@@ -121,6 +121,14 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <returns>Collection of IMedia <see cref="Models.MemoryStreamMedia"/></returns>
         Task<IEnumerable<IMedia>> GetMediaAsync(string path, string storageContainer, bool loadResourcePathOnly);
 
-        //Task<IDirectoryResult> SyncDirectory(string path, string rootStorageContainer);
+        /// <summary>
+        /// Persist directory to cloud storage.
+        /// </summary>
+        /// <param name="path">Directory path subject to validation.</param>
+        /// <param name="rootStorageContainer">Cloud container</param>
+        /// <param name="includeSubDirectory">Flag telling the repo to stash sub directory content.</param>
+        /// <returns>IDirectoryResult implementation.</returns>
+        Task<IDirectoryResult> StashDirectoryAsync(string path, string rootStorageContainer, bool includeSubDirectory = false);
+        
     }
 }

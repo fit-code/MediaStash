@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -30,7 +32,7 @@ using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib
 {
-    public static class MediaExtensions
+    public static class Extensions
     {
         ///// <summary>
         ///// Grab the byte array from IFile concrete type.
@@ -97,6 +99,34 @@ namespace Fitcode.MediaStash.Lib
                 var hash = md5.ComputeHash(buffer);
                 return string.Concat(hash.Select(x => x.ToString("X2")));
             }
+        }
+
+        public static byte[] ToByArray(this FileInfo fileInfo)
+        {
+            byte[] result = null;
+
+            using (var stream = fileInfo.OpenRead())
+                result = stream.ToByteArray(false);
+
+            return result;
+        }
+
+        public static IList<DirectoryOperation> ToOperations(this DirectoryInfo directoryInfo, string prefix = null)
+        {
+            var operations = new List<DirectoryOperation>();
+            var files = directoryInfo.GetFiles();
+
+            Parallel.ForEach(files, (f) =>
+            {
+                operations.Add(new DirectoryOperation
+                {
+                    Prefix = $"{prefix ?? directoryInfo.Name}",
+                    FileName = f.Name,
+                    FileData = f.ToByArray()
+                });
+            });
+
+            return operations;
         }
     }
 }
