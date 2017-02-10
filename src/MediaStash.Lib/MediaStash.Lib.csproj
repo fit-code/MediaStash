@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\ICompressionProvider.cs" />
+    <Compile Include="Abstractions\IDirectoryResult.cs" />
     <Compile Include="Abstractions\IEncryptionProvider.cs" />
     <Compile Include="Abstractions\IMedia.cs" />
     <Compile Include="Abstractions\IMediaContainer.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Helpers\MimeResolver.cs" />
     <Compile Include="MediaExtensions.cs" />
     <Compile Include="Models\CompressedPack.cs" />
+    <Compile Include="Models\DirectoryResult.cs" />
     <Compile Include="Models\GenericMedia.cs" />
     <Compile Include="Models\MediaBase.cs" />
     <Compile Include="Models\MediaContainer.cs" />

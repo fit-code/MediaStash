@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Lib</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>MediaStash.Lib</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</description>
     <releaseNotes><![CDATA[
-      Added ServiceAccount to Configuration for AWS Key/Secret support.
+      Small update to support Directory sync/retrieve.
     ]]></releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>
     <tags>Media, Images, Compression, Encryption, ASP.NET, MVC, Storage</tags>

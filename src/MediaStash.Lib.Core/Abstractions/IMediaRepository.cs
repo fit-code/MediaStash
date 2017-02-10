@@ -43,7 +43,18 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// </summary>
         IEnumerable<IProvider> Providers { get; }
 
+        /// <summary>
+        /// Applies all provider transformations to an IMedia implementation.
+        /// </summary>
+        /// <param name="media">IMedia concrete implementation.</param>
+        /// <returns>Task (IMedia.Data is modified directly)</returns>
         Task RunProviderProcess(IMedia media);
+
+        /// <summary>
+        /// Reverses transformations applied by provider collection.
+        /// </summary>
+        /// <param name="media">IMedia concreate type.</param>
+        /// <returns>Task (IMedia.Data is modified directly)</returns>
         Task ReverseProvider(IMedia media); 
 
         /// <summary>

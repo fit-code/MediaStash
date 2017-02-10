@@ -43,7 +43,18 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// </summary>
         IEnumerable<IProvider> Providers { get; }
 
+        /// <summary>
+        /// Applies all provider transformations to an IMedia implementation.
+        /// </summary>
+        /// <param name="media">IMedia concrete implementation.</param>
+        /// <returns>Task (IMedia.Data is modified directly)</returns>
         Task RunProviderProcess(IMedia media);
+
+        /// <summary>
+        /// Reverses transformations applied by provider collection.
+        /// </summary>
+        /// <param name="media">IMedia concreate type.</param>
+        /// <returns>Task (IMedia.Data is modified directly)</returns>
         Task ReverseProvider(IMedia media);
 
         /// <summary>
@@ -109,5 +120,7 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <param name="storageContainer">Overrides configuration root container.</param>
         /// <returns>Collection of IMedia <see cref="Models.MemoryStreamMedia"/></returns>
         Task<IEnumerable<IMedia>> GetMediaAsync(string path, string storageContainer, bool loadResourcePathOnly);
+
+        //Task<IDirectoryResult> SyncDirectory(string path, string rootStorageContainer);
     }
 }
