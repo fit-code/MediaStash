@@ -23,33 +23,15 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Models;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace Fitcode.MediaStash.Lib.Helpers
 {
-    public interface IRepositoryConfiguration
-    {
-        string ConnectionString { get; }
-        
-        string RootContainer { get; }
+    public delegate void Notify(Notification notification);
 
-        ServiceAccount Account { get; }
-    }
-
-    public interface ICompressionConfiguration
+    public class Notification
     {
-        IEnumerable<string> SupportedExtensions { get; }
-    }
-
-    public interface IEncryptionConfiguration
-    {
-        string EncryptionExtension { get; }
-        string Password { get; }
-        string Salt { get; }
-        Rfc2898DeriveBytes PasswordDeriveBytes { get; }
-        byte[] GetKeyBytes { get; }
-        void Reset(string password, string salt);
+        public int TotalFiles { get; set; }
+        public double TotalMegabytes { get; set; }
+        public double ProcessedMegabytes { get; set; }
     }
 }

@@ -32,6 +32,8 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
+using Fitcode.MediaStash.Lib.Helpers;
+using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Azure
 {
@@ -39,6 +41,8 @@ namespace Fitcode.MediaStash.Azure
     {
         private readonly CloudStorageAccount _storageAccount;
         private readonly CloudBlobClient _blobClient;
+
+        public event Notify OnDirectoryStash = null;
 
         public MediaRepository(IRepositoryConfiguration config)
         {
@@ -209,6 +213,56 @@ namespace Fitcode.MediaStash.Azure
         public async Task<IEnumerable<IMedia>> GetMediaAsync(string path, string storageContainer, bool loadResourcePathOnly)
         {
             return (await GetMediaContainerAsync(path, storageContainer, loadResourcePathOnly))?.Media;
+        }
+
+        public Task<IDirectoryResult> StashDirectoryAsync(string path, bool includeSubDirectory = false)
+        {
+            return StashDirectoryAsync(path, Config.RootContainer, includeSubDirectory);
+        }
+
+        public async Task<IDirectoryResult> StashDirectoryAsync(string path, string rootStorageContainer, bool includeSubDirectory = false)
+        {
+            if (Directory.Exists(path))
+            {
+                CloudBlobContainer rootContainer = _blobClient.GetContainerReference(rootStorageContainer);
+
+                var rootDir = new DirectoryInfo(path);
+                List<DirectoryOperation> operations = rootDir.ToOperations().ToList();
+
+                if (includeSubDirectory)
+                {
+                    foreach (var subDir in rootDir.GetDirectories())
+                    {
+                        operations.AddRange(subDir.ToOperations($@"{rootDir.Name}\{subDir.Name}", true));
+                    }
+                }
+
+                var notificationReport = new Notification
+                {
+                    TotalFiles = operations.Count,
+                    TotalMegabytes = operations.Sum(s => s.FileData.Length).ConvertToMegabytes(),
+                    ProcessedMegabytes = 0
+                };
+
+                if (OnDirectoryStash != null)
+                    OnDirectoryStash(notificationReport);
+
+                foreach (var operation in operations)
+                {
+                    CloudBlockBlob blob = rootContainer.GetBlockBlobReference(operation.CloudPath);
+                    notificationReport.ProcessedMegabytes += operation.FileData.Length.ConvertToMegabytes();
+
+                    await blob.UploadFromByteArrayAsync(operation.FileData, 0, operation.FileData.Length);
+
+                    if (OnDirectoryStash != null)
+                        OnDirectoryStash(notificationReport);
+                }
+
+                return new DirectoryResult(rootDir, rootStorageContainer, operations.Select(s =>
+                    new Tuple<string, string>(s.OriginalPath, s.CloudPath)).ToList());
+            }
+            else
+                throw new InvalidOperationException($"Invalid DirectoryPath: {path}");
         }
     }
 }

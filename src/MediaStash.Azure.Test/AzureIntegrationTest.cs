@@ -53,8 +53,7 @@ namespace MediaStash.Lib.Test
             _repositoryConfiguration = new RepositoryConfiguration
             {
                 RootContainer = "dev",
-                ConnectionString = Azure.Test.StorageConnection.ConnectionString,
-                EnableNotifications = true
+                ConnectionString = Azure.Test.StorageConnection.ConnectionString
             };
             _mediaRepository = new MediaRepository(_repositoryConfiguration,
                 new List<IProvider>

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Amazon</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>MediaStash.Amazon</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -13,15 +13,15 @@
     <description>Extends the MediaStash.Lib and provides AWS integration.</description>
     <releaseNotes>
       <![CDATA[
-        -Added IAmazonMediaRepository : IMediaRepository to expose Amazon specific details like displaying objects from bucket/prefix.
-        -Patch for missing load only resources functionality. 
+      -Added support for contract updates in version 1.0.5 of Lib.
+      -Added support for directory stashing.
       ]]>
     </releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>
     <tags>Media, Images, Compression, Encryption, AWS, S3, Amazon, Storage, MVC, ASP.NET</tags>
 
     <dependencies>
-      <dependency id="MediaStash.Lib" version="1.0.3" />
+      <dependency id="MediaStash.Lib" version="1.0.5" />
       <dependency id="AWSSDK" version="2.3.55.2" />
     </dependencies>
   </metadata>

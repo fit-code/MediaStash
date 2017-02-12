@@ -59,8 +59,7 @@ namespace MediaStash.Amazon.Core.Test
             _repositoryConfiguration = new RepositoryConfiguration
             {
                 RootContainer = "fitcode",
-                Account = StorageConnection.Account,
-                EnableNotifications = true
+                Account = StorageConnection.Account
             };
             _mediaRepository = new MediaRepository(_repositoryConfiguration);
         }

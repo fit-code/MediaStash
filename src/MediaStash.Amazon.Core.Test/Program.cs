@@ -24,6 +24,7 @@ namespace MediaStash.Amazon.Core.Test
         {
             Init();
             TestListBucket();
+            TestDirectioryUpload();
             //TestUpload();
             TestDownload();
         }
@@ -36,6 +37,16 @@ namespace MediaStash.Amazon.Core.Test
                 Account = StorageConnection.Account
             };
             _mediaRepository = new MediaRepository(_repositoryConfiguration);
+        }
+
+        public static void TestDirectioryUpload()
+        {
+            _mediaRepository.OnDirectoryStash += (n) =>
+            {
+                Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
+            };
+
+            _mediaRepository.StashDirectoryAsync(@"E:\azure-test", true).Wait();
         }
 
         private static void TestUpload()

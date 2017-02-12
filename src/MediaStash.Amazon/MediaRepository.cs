@@ -256,7 +256,7 @@ namespace Fitcode.MediaStash.AmazonStorage
                     ProcessedMegabytes = 0
                 };
 
-                if (Config.EnableNotifications && OnDirectoryStash != null)
+                if (OnDirectoryStash != null)
                     OnDirectoryStash(notificationReport);
 
                 foreach (var operation in operations)
@@ -274,7 +274,7 @@ namespace Fitcode.MediaStash.AmazonStorage
 
                         notificationReport.ProcessedMegabytes += operation.FileData.Length.ConvertToMegabytes();
 
-                        if (Config.EnableNotifications && OnDirectoryStash != null)
+                        if (OnDirectoryStash != null)
                             OnDirectoryStash(notificationReport);
                     }
                 }

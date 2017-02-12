@@ -32,12 +32,16 @@ using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Fitcode.MediaStash.Lib;
+using Fitcode.MediaStash.Lib.Helpers;
 
 namespace Fitcode.MediaStash.AmazonStorage
 {
     public class MediaRepository : IAmazonMediaRepository, IDisposable
     {
         private AmazonS3Client _s3Client = null;
+
+        public event Notify OnDirectoryStash = null;
 
         public MediaRepository(IRepositoryConfiguration config)
         {
@@ -225,7 +229,65 @@ namespace Fitcode.MediaStash.AmazonStorage
             return (await GetMediaContainerAsync(path, storageContainer, loadResourcePathOnly))?.Media;
         }
 
+        public Task<IDirectoryResult> StashDirectoryAsync(string path, bool includeSubDirectory = false)
+        {
+            return StashDirectoryAsync(path, Config.RootContainer, includeSubDirectory);
+        }
+
+        public async Task<IDirectoryResult> StashDirectoryAsync(string path, string rootStorageContainer, bool includeSubDirectory = false)
+        {
+            if (Directory.Exists(path))
+            {
+                var rootDir = new DirectoryInfo(path);
+                List<DirectoryOperation> operations = rootDir.ToOperations().ToList();
+
+                if (includeSubDirectory)
+                {
+                    foreach (var subDir in rootDir.GetDirectories())
+                    {
+                        operations.AddRange(subDir.ToOperations($@"{rootDir.Name}\{subDir.Name}", true));
+                    }
+                }
+
+                var notificationReport = new Notification
+                {
+                    TotalFiles = operations.Count,
+                    TotalMegabytes = operations.Sum(s => s.FileData.Length).ConvertToMegabytes(),
+                    ProcessedMegabytes = 0
+                };
+
+                if (OnDirectoryStash != null)
+                    OnDirectoryStash(notificationReport);
+
+                foreach (var operation in operations)
+                {
+                    using (var stream = new MemoryStream(operation.FileData))
+                    {
+                        PutObjectRequest request = new PutObjectRequest();
+                        request.AutoCloseStream = true;
+                        request.BucketName = rootStorageContainer;
+                        request.CannedACL = S3CannedACL.PublicRead;
+                        request.Key = operation.CloudPath.Replace(@"\", "/");
+                        request.InputStream = stream;
+
+                        PutObjectResponse response = await _s3Client.PutObjectAsync(request);
+
+                        notificationReport.ProcessedMegabytes += operation.FileData.Length.ConvertToMegabytes();
+
+                        if (OnDirectoryStash != null)
+                            OnDirectoryStash(notificationReport);
+                    }
+                }
+
+                return new DirectoryResult(rootDir, rootStorageContainer, operations.Select(s =>
+                    new Tuple<string, string>(s.OriginalPath, s.CloudPath)).ToList());
+            }
+            else
+                throw new InvalidOperationException($"Invalid DirectoryPath: {path}");
+        }
+
         private bool _disposed = false;
+
         public void Dispose()
         {
             Dispose(true);

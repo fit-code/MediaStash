@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -30,7 +32,7 @@ using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib
 {
-    public static class MediaExtensions
+    public static class Extensions
     {
         ///// <summary>
         ///// Grab the byte array from IFile concrete type.
@@ -97,6 +99,47 @@ namespace Fitcode.MediaStash.Lib
                 var hash = md5.ComputeHash(buffer);
                 return string.Concat(hash.Select(x => x.ToString("X2")));
             }
+        }
+
+        public static byte[] ToByArray(this FileInfo fileInfo)
+        {
+            byte[] result = null;
+
+            using (var stream = fileInfo.OpenRead())
+                result = stream.ToByteArray(false);
+
+            return result;
+        }
+
+        public static double ConvertToMegabytes(this int byteCount)
+        {
+            if (byteCount ==  0)
+                return 0.0;
+
+            return ((byteCount / 1024f) / 1024f);
+        }
+
+        public static IList<DirectoryOperation> ToOperations(this DirectoryInfo directoryInfo, string prefix = null, bool recursiveSearch = false)
+        {
+            var operations = new List<DirectoryOperation>();
+            var files = directoryInfo.GetFiles();
+
+           foreach(var f in files)
+            {
+                operations.Add(new DirectoryOperation
+                {
+                    Prefix = $"{prefix ?? directoryInfo.Name}",
+                    FileName = f.Name,
+                    FileData = f.ToByArray(),
+                    OriginalPath = f.FullName
+                });
+            };
+
+            if (recursiveSearch)
+                foreach (var dir in directoryInfo.GetDirectories())
+                    operations.AddRange(dir.ToOperations($@"{prefix}\{dir.Name}"));
+
+            return operations;
         }
     }
 }

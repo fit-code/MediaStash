@@ -47,8 +47,19 @@ namespace MediaStash.Azure.Core.Test
         public static void Main(string[] args)
         {
             Init();
+            TestDirectioryUpload();
             TestUpload();
             TestDownload();
+        }
+
+        public static void TestDirectioryUpload()
+        {
+            _mediaRepository.OnDirectoryStash += (n) =>
+            {
+                Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
+            };
+
+            _mediaRepository.StashDirectoryAsync(@"E:\azure-test", true).Wait();
         }
 
         private static void Init()
