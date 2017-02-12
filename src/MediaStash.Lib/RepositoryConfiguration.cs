@@ -38,6 +38,8 @@ namespace Fitcode.MediaStash.Lib
 
         public string ConnectionString { get; set; }
 
+        public bool EnableNotifications { get; set; } = false;
+
         public string RootContainer { get; set; }
     }
 

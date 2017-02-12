@@ -32,6 +32,8 @@ using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Azure;
 using Fitcode.MediaStash.Lib.Providers;
+using System;
+using System.Diagnostics;
 
 namespace MediaStash.Lib.Test
 {
@@ -51,14 +53,15 @@ namespace MediaStash.Lib.Test
             _repositoryConfiguration = new RepositoryConfiguration
             {
                 RootContainer = "dev",
-                ConnectionString = Azure.Test.StorageConnection.ConnectionString
+                ConnectionString = Azure.Test.StorageConnection.ConnectionString,
+                EnableNotifications = true
             };
             _mediaRepository = new MediaRepository(_repositoryConfiguration,
                 new List<IProvider>
                 {
                     new EncryptionProvider(new EncryptionConfiguration {
                         Password = "test",
-                        EncryptionExtension = ".sec"
+                        EncryptionExtension = ".sec",
                     })
                 });
         }
@@ -67,6 +70,17 @@ namespace MediaStash.Lib.Test
         public void Cleanup()
         {
 
+        }
+
+        [Test]
+        public static void TestDirectioryUpload()
+        {
+            _mediaRepository.OnDirectoryStash += (n) =>
+            {
+                Debug.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
+            };
+
+            _mediaRepository.StashDirectoryAsync(@"E:\azure-test", true).Wait();         
         }
 
         [Test]

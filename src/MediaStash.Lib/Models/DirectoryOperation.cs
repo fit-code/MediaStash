@@ -32,6 +32,7 @@ namespace Fitcode.MediaStash.Lib.Models
     {
         public string Prefix { get; set; }
         public string CloudPath { get { return $@"{Prefix}\{FileName}"; } }
+        public string OriginalPath { get; set; }
         public string FileExtension { get { return Path.GetExtension(FileName); } }
         public string FileName { get; set; }
         public byte[] FileData { get; set; }

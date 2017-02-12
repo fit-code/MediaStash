@@ -23,6 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Lib.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -128,7 +129,11 @@ namespace Fitcode.MediaStash.Lib.Abstractions
         /// <param name="rootStorageContainer">Cloud container</param>
         /// <param name="includeSubDirectory">Flag telling the repo to stash sub directory content.</param>
         /// <returns>IDirectoryResult implementation.</returns>
-        Task<IDirectoryResult> StashDirectoryAsync(string path, string rootStorageContainer, bool includeSubDirectory = false);
-        
+        Task<IDirectoryResult> StashDirectoryAsync(string path, bool includeSubDirectory = false);
+
+        Task<IDirectoryResult> StashDirectoryAsync(string path, string rootContainer, bool includeSubDirectory = false);
+
+        // Events
+        event Notify OnDirectoryStash;
     }
 }

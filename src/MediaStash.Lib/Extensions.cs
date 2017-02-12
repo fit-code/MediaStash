@@ -111,7 +111,15 @@ namespace Fitcode.MediaStash.Lib
             return result;
         }
 
-        public static IList<DirectoryOperation> ToOperations(this DirectoryInfo directoryInfo, string prefix = null)
+        public static double ConvertToMegabytes(this int byteCount)
+        {
+            if (byteCount ==  0)
+                return 0.0;
+
+            return ((byteCount / 1024f) / 1024f);
+        }
+
+        public static IList<DirectoryOperation> ToOperations(this DirectoryInfo directoryInfo, string prefix = null, bool recursiveSearch = false)
         {
             var operations = new List<DirectoryOperation>();
             var files = directoryInfo.GetFiles();
@@ -122,9 +130,14 @@ namespace Fitcode.MediaStash.Lib
                 {
                     Prefix = $"{prefix ?? directoryInfo.Name}",
                     FileName = f.Name,
-                    FileData = f.ToByArray()
+                    FileData = f.ToByArray(),
+                    OriginalPath = f.FullName
                 });
             });
+
+            if (recursiveSearch)
+                foreach (var dir in directoryInfo.GetDirectories())
+                    operations.AddRange(dir.ToOperations($@"{prefix}\{dir.Name}"));
 
             return operations;
         }
