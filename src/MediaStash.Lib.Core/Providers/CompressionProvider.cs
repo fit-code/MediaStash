@@ -46,17 +46,17 @@ namespace Fitcode.MediaStash.Lib.Providers
 
         public CompressedPack Pack(string name, IEnumerable<IMedia> mediaCollection)
         {
-            return PackAsync(name, mediaCollection).Result;
+            return PackAsync(name, mediaCollection).GetAwaiter().GetResult();
         }
 
         public CompressedPack Pack(string name, MemoryMediaContainer memoryMediaContainer)
         {
-            return PackAsync(name, memoryMediaContainer).Result;
+            return PackAsync(name, memoryMediaContainer).GetAwaiter().GetResult();
         }
 
         public CompressedPack Pack(string name, MediaContainer mediaContainer)
         {
-            return PackAsync(name, mediaContainer).Result;
+            return PackAsync(name, mediaContainer).GetAwaiter().GetResult();
         }
 
         public async Task<CompressedPack> PackAsync(string name, IEnumerable<IMedia> mediaCollection)
@@ -91,12 +91,12 @@ namespace Fitcode.MediaStash.Lib.Providers
 
         public MediaContainer Unpack(MemoryStream stream)
         {
-            return UnpackAsync(stream).Result;
+            return UnpackAsync(stream).GetAwaiter().GetResult();
         }
 
         public MediaContainer Unpack(byte[] buffer)
         {
-            return UnpackAsync(new MemoryStream(buffer)).Result;
+            return UnpackAsync(new MemoryStream(buffer)).GetAwaiter().GetResult();
         }
 
         public async Task<MediaContainer> UnpackAsync(MemoryStream stream)

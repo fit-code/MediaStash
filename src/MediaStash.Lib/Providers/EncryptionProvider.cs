@@ -100,7 +100,7 @@ namespace Fitcode.MediaStash.Lib.Providers
 
         public byte[] Encrypt(byte[] data)
         {
-            return EncryptAsync(data).Result;
+            return EncryptAsync(data).GetAwaiter().GetResult();
         }
 
         public async Task<byte[]> EncryptAsync(byte[] data)
@@ -187,7 +187,7 @@ namespace Fitcode.MediaStash.Lib.Providers
 
         public byte[] Decrypt(byte[] encrypted)
         {
-            return DecryptAsync(encrypted).Result;
+            return DecryptAsync(encrypted).GetAwaiter().GetResult();
         }
 
         public void Decrypt(MediaContainer mediaContainer)

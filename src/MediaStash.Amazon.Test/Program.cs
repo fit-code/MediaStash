@@ -89,7 +89,7 @@ namespace MediaStash.Amazon.Core.Test
 
         private static void TestDownload()
         {
-            var result = _mediaRepository.GetMediaAsync(_amazonPath, true).Result;
+            var result = _mediaRepository.GetMediaAsync(_amazonPath, true).GetAwaiter().GetResult();
             foreach (var media in result)
             {
                 

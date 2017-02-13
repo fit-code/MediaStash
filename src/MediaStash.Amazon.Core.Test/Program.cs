@@ -64,7 +64,7 @@ namespace MediaStash.Amazon.Core.Test
 
         private static void TestDownload()
         {
-            var result = _mediaRepository.GetMediaAsync(_amazonPath, true).Result;
+            var result = _mediaRepository.GetMediaAsync(_amazonPath, true).GetAwaiter().GetResult();
             foreach (var media in result)
             {
 
@@ -73,7 +73,7 @@ namespace MediaStash.Amazon.Core.Test
 
         private static void TestListBucket()
         {
-            var content = _mediaRepository.ListObjectRequest(_repositoryConfiguration.RootContainer, "unit-test").Result;
+            var content = _mediaRepository.ListObjectRequest(_repositoryConfiguration.RootContainer, "unit-test").GetAwaiter().GetResult();
             foreach (var item in content)
             {
                 Console.WriteLine(item.Key);

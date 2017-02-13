@@ -87,7 +87,7 @@ namespace MediaStash.Azure.Core.Test
 
         private static void TestDownload()
         {
-            var result = _mediaRepository.GetMediaAsync(_azurePath, true).Result;
+            var result = _mediaRepository.GetMediaAsync(_azurePath, true).GetAwaiter().GetResult();
             foreach (var media in result)
             {
                 
