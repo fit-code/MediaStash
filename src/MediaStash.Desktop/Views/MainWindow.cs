@@ -28,29 +28,60 @@ using System;
 
 namespace Fitcode.MediaStash.Desktop.Views
 {
-    public class MainWindow : BaseWindow
+    //http://zetcode.com/gui/gtksharp/layout/
+    public class MainWindow : BaseWindow<VBox>
     {
+
         public MainWindow(string title, int width = 800, int height = 600) : base(title, width, height)
         {
-            DeleteEvent += new DeleteEventHandler(delete_cb);
+            ParentContainer = new VBox();
 
+            CreateMenu();
 
-            VBox box = new VBox(false, 2);
+            Add(ParentContainer);
+        }
+
+        private void CreateMenu()
+        {
+            AccelMap.AddEntry("Exit", Gdk.Keyval.FromName("e"), Gdk.ModifierType.ControlMask);
 
             MenuBar mb = new MenuBar();
+
             Menu file_menu = new Menu();
+
             MenuItem exit_item = new MenuItem("Exit");
             exit_item.Activated += (sender, args) => Application.Quit();
+            exit_item.AccelPath = "Exit";
+
             file_menu.Append(exit_item);
+
             MenuItem file_item = new MenuItem("File");
+            MenuItem help_item = new MenuItem("Help");
+
             file_item.Submenu = file_menu;
+
             mb.Append(file_item);
-            box.PackStart(mb, false, false, 0);
+            mb.Append(help_item);
 
-            Button btn = new Button("Yep, that's a menu");
-            box.PackStart(btn, false, false, 0);
+            ParentContainer.PackStart(mb, false, false, 0);
 
-            Add(box);
+            Toolbar toolbar = new Toolbar();
+            toolbar.ToolbarStyle = ToolbarStyle.Icons;
+
+            ToolButton newtb = new ToolButton(Stock.New);
+            ToolButton opentb = new ToolButton(Stock.Open);
+            ToolButton savetb = new ToolButton(Stock.Save);
+            SeparatorToolItem sep = new SeparatorToolItem();
+            ToolButton quittb = new ToolButton(Stock.Quit);
+
+            toolbar.Insert(newtb, 0);
+            toolbar.Insert(opentb, 1);
+            toolbar.Insert(savetb, 2);
+            toolbar.Insert(sep, 3);
+            toolbar.Insert(quittb, 4);
+
+            //VBox vbox = new VBox(false, 2);
+            ParentContainer.PackStart(toolbar, false, false, 0);
         }
 
         public void delete_cb(object o, DeleteEventArgs args)

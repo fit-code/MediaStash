@@ -37,9 +37,9 @@ namespace Fitcode.MediaStash.Desktop
         {
             Application.Init();
 
-            using (var demo = new DemoWindow())
+            using (var main = new MainWindow("Stash Tester"))
             {
-                demo.ShowAll();
+                main.ShowAll();
             }
 
             Application.Run();

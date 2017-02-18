@@ -23,14 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-
 using Gtk;
-using System;
 
 namespace Fitcode.MediaStash.Desktop.Views
 {
-    public abstract class BaseWindow : Window
+    public abstract class BaseWindow<T> : Window where T : Container
     {
+        public T ParentContainer { get; set; }
+
         public BaseWindow(string title, int width = 800, int height = 600) : base(title)
         {
             DefaultWidth = width;
@@ -38,6 +38,25 @@ namespace Fitcode.MediaStash.Desktop.Views
 
             SetPosition(WindowPosition.Center);
             SetIconFromFile("icon.ico");
+
+            DeleteEvent += new DeleteEventHandler(HandleDelete);
+        }
+
+        public void HandleDelete(object o, DeleteEventArgs args)
+        {
+            Application.Quit();
+            args.RetVal = true;
+        }
+
+        public override void Dispose()
+        {
+            if (ParentContainer != null)
+            {
+                ParentContainer.Dispose();
+                ParentContainer = null;
+            }
+
+            base.Dispose();
         }
     }
 }
