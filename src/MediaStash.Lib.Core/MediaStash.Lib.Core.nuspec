@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Lib.Core</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <title>MediaStash.Lib.Core</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -13,11 +13,7 @@
     <description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</description>
     <releaseNotes>
       <![CDATA[
-      -Added Extension method to assist with Notification event.
-      -Added notification event for stashing entire directories (including sub directories).
-       This means a complete count of files, total megabytes, and processed megabytes would be reported
-       after each record is processed.
-      -Updates to contracts and models to support changes.
+       Added DreamObjects and a way to pass ServiceUrl to Amazon Lib. (ServiceAccount.CreateForS3("key", "secret", "https://objects-us-west-1.dream.io/"))
     ]]>
     </releaseNotes>
     <copyright>Copyright Fitcode.io 2017</copyright>

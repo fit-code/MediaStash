@@ -11,4 +11,8 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="nuget.exe" />
+  </ItemGroup>
+
 </Project>

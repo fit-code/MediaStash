@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MediaStash.Amazon.Core</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>MediaStash.Amazon.Core</title>
     <authors>Felipe Ramos</authors>
     <owners>Fitcode.io</owners>
@@ -13,6 +13,7 @@
     <description>Extends the MediaStash.Lib and provides AWS integration.</description>
     <releaseNotes>
       <![CDATA[
+      -Added Config support for ServiceUrl. This change allows the use of DreamObjects. (ServiceAccount.CreateForS3("key", "secret", "https://objects-us-west-1.dream.io/"))
       -Added support for contract updates in version 1.0.5 of Lib.
       -Added support for directory stashing.
       ]]>
@@ -21,8 +22,8 @@
     <tags>Media, Images, Compression, Encryption, AWS, S3, Amazon, Storage, MVC, ASP.NET</tags>
 
     <dependencies>
-      <dependency id="MediaStash.Lib.Core" version="1.0.4" />
-      <dependency id="AWSSDK.S3" version="3.3.5.3" />
+      <dependency id="MediaStash.Lib.Core" version="1.0.5" />
+      <dependency id="AWSSDK.S3" version="3.3.5.7" />
     </dependencies>
   </metadata>
   <files>

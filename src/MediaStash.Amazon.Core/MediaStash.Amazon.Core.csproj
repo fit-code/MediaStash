@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="nuget.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MediaStash.Lib.Core\MediaStash.Lib.Core.csproj" />
   </ItemGroup>
 
