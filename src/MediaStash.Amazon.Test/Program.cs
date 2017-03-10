@@ -58,7 +58,7 @@ namespace MediaStash.Amazon.Core.Test
             _repositoryConfiguration = new RepositoryConfiguration
             {
                 RootContainer = "fitcode",
-                Account = StorageConnection.Account
+                Account = StorageConnection.DreamObjectsAccount // ServiceAccount.CreateForS3("key", "secret", "objects-us-west-1.dream.io")
             };
             _mediaRepository = new MediaRepository(_repositoryConfiguration);
         }
@@ -69,8 +69,8 @@ namespace MediaStash.Amazon.Core.Test
             {
                 Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
             };
-
-            _mediaRepository.StashDirectoryAsync(@"E:\azure-test", true).Wait();
+            //var result = _mediaRepository.ListObjectRequest("fitcode", "Temp").GetAwaiter().GetResult();
+            _mediaRepository.StashDirectoryAsync(@"E:\Temp", true).Wait();
         }
 
         private static void TestUpload()
@@ -82,7 +82,7 @@ namespace MediaStash.Amazon.Core.Test
                     new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true))
                 }
             };
-
+            
             _mediaRepository.StashMediaAsync(_amazonPath, container.Media).Wait();
         }
 

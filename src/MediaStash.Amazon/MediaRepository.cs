@@ -47,7 +47,19 @@ namespace Fitcode.MediaStash.AmazonStorage
         {
             this.Config = config;
 
-            _s3Client = new AmazonS3Client(config.Account.Key, config.Account.Secret, Amazon.RegionEndpoint.USEast1);
+            if (string.IsNullOrEmpty(config.Account.ServiceUrl))
+            {
+                // TODO: Expose region
+                _s3Client = new AmazonS3Client(config.Account.Key, config.Account.Secret, Amazon.RegionEndpoint.USEast1);
+            }
+            else
+            {
+                _s3Client = new AmazonS3Client(config.Account.Key, config.Account.Secret,
+                    new AmazonS3Config
+                    {
+                        ServiceURL = config.Account.ServiceUrl
+                    });
+            }
         }
 
         public MediaRepository(IRepositoryConfiguration config, IEnumerable<IProvider> providers) : this(config)

@@ -28,6 +28,7 @@ namespace Fitcode.MediaStash.Lib.Models
 {
     public class ServiceAccount
     {
+        public string ServiceUrl { get; set; } = null;
         public string Key { get; private set;}
         public string Secret { get; private set; }
         public string Token { get; private set; }
@@ -43,12 +44,20 @@ namespace Fitcode.MediaStash.Lib.Models
             this.Token = token;
         }
 
-        public ServiceAccount CreateForAmazon(string key, string secret)
+        public static ServiceAccount Create(string key, string secret)
         {
             return new ServiceAccount
             {
                 Key = key,
                 Secret = secret
+            };
+        }
+
+        public static ServiceAccount CreateForS3(string key, string secret, string serviceUrl = null)
+        {
+            return new ServiceAccount(key, secret)
+            {
+                ServiceUrl = serviceUrl
             };
         }
     }
