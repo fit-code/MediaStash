@@ -2,7 +2,6 @@
 using Fitcode.MediaStash.Lib;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
-using MediaStash.Amazon.Test;
 using System;
 using System.Collections.Generic;
 using System.IO;

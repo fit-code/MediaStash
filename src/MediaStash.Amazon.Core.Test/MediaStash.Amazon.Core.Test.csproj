@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <AssemblyName>MediaStash.Amazon.Core.Test</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>MediaStash.Amazon.Core.Test</PackageId>
+    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MediaStash.Amazon.Core\MediaStash.Amazon.Core.csproj" />
+    <ProjectReference Include="..\MediaStash.Lib.Core\MediaStash.Lib.Core.csproj" />
+  </ItemGroup>
+
+</Project>
