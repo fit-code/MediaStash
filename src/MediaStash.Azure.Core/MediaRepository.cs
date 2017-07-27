@@ -244,8 +244,8 @@ namespace Fitcode.MediaStash.Azure
                     ProcessedMegabytes = 0
                 };
 
-                if (OnDirectoryStash != null)
-                    OnDirectoryStash(notificationReport);
+
+                OnDirectoryStash?.Invoke(notificationReport);
 
                 foreach (var operation in operations)
                 {
@@ -254,8 +254,7 @@ namespace Fitcode.MediaStash.Azure
 
                     await blob.UploadFromByteArrayAsync(operation.FileData, 0, operation.FileData.Length);
 
-                    if (OnDirectoryStash != null)
-                        OnDirectoryStash(notificationReport);
+                    OnDirectoryStash?.Invoke(notificationReport);
                 }
 
                 return new DirectoryResult(rootDir, rootStorageContainer, operations.Select(s =>

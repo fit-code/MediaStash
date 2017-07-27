@@ -268,8 +268,7 @@ namespace Fitcode.MediaStash.AmazonStorage
                     ProcessedMegabytes = 0
                 };
 
-                if (OnDirectoryStash != null)
-                    OnDirectoryStash(notificationReport);
+                OnDirectoryStash?.Invoke(notificationReport);
 
                 foreach (var operation in operations)
                 {
@@ -281,13 +280,12 @@ namespace Fitcode.MediaStash.AmazonStorage
                         request.CannedACL = S3CannedACL.PublicRead;
                         request.Key = operation.CloudPath.Replace(@"\", "/");
                         request.InputStream = stream;
-                        
+
                         PutObjectResponse response = await _s3Client.PutObjectAsync(request);
 
                         notificationReport.ProcessedMegabytes += operation.FileData.Length.ConvertToMegabytes();
 
-                        if (OnDirectoryStash != null)
-                            OnDirectoryStash(notificationReport);
+                        OnDirectoryStash?.Invoke(notificationReport);
                     }
                 }
 
