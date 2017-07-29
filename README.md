@@ -1,5 +1,7 @@
 # MediaStash
-Fitcode image stash library helps easily leverage azure and amazon to store media files. With abstractions and providers for compression and encryption there is an extra layer of perfomance and security.
+MediaStash library helps easily leverage azure and amazon to store media files. With abstractions and providers for compression and encryption there is an extra layer of perfomance and security.
+
+Let's say you want to encrypt your images upstream/downstream; with MediaStash you can do it with the default provider, or by adding your own custom implementation. You can also chain providers ex: you can encrypt+watermark by simply adding multiple providers.
 
 ##Getting Started
 Take a look at our getting started solution for a fully functionality MVC application.
