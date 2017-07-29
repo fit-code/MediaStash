@@ -1,81 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{194190E8-BE0B-4914-A044-B4A5C5B7D555}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MediaStash.Lib</RootNamespace>
+    <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
     <AssemblyName>MediaStash.Lib</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <RootNamespace>MediaStash.Lib</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+    <Authors>Felipe Ramos</Authors>
+    <Company>Fitcode.io</Company>
+    <Product />
+    <Description>Collection of models, abstractions, and providers to facilitate persistance to cloud services.</Description>
+    <Copyright>Copyright Fitcode.io 2017</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/fit-code/MediaStash/master/License</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/fit-code/MediaStash</PackageProjectUrl>
+    <PackageIconUrl>https://avatars3.githubusercontent.com/u/22687448?v=4&amp;s=200</PackageIconUrl>
+    <RepositoryUrl>https://github.com/fit-code/MediaStash</RepositoryUrl>
+    <PackageTags>Media, Images, Compression, Encryption, ASP.NET, MVC, Storage</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageReleaseNotes>
+    <![CDATA[
+      -Moved to netstandard 1.6 since maintaining two versions for 4.5 and Core was too much work and error prone.
+      -Added new providers for watermark and image processing.
+    ]]>
+    </PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Compile Include="Abstractions\ICompressionProvider.cs" />
-    <Compile Include="Abstractions\IDirectoryResult.cs" />
-    <Compile Include="Abstractions\IEncryptionProvider.cs" />
-    <Compile Include="Abstractions\IMedia.cs" />
-    <Compile Include="Abstractions\IMediaContainer.cs" />
-    <Compile Include="Abstractions\IMediaRepository.cs" />
-    <Compile Include="Abstractions\IProvider.cs" />
-    <Compile Include="Abstractions\IRepositoryConfiguration.cs" />
-    <Compile Include="Helpers\MimeResolver.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Helpers\Notification.cs" />
-    <Compile Include="Models\CompressedPack.cs" />
-    <Compile Include="Models\DirectoryOperation.cs" />
-    <Compile Include="Models\DirectoryResult.cs" />
-    <Compile Include="Models\GenericMedia.cs" />
-    <Compile Include="Models\MediaBase.cs" />
-    <Compile Include="Models\MediaContainer.cs" />
-    <Compile Include="Models\MemoryMediaContainer.cs" />
-    <Compile Include="Models\MemoryStreamMedia.cs" />
-    <Compile Include="Models\PackBase.cs" />
-    <Compile Include="Models\ServiceAccount.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\CompressionProvider.cs" />
-    <Compile Include="Providers\EncryptionProvider.cs" />
-    <Compile Include="RepositoryConfiguration.cs" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="nuget.exe" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  
 </Project>

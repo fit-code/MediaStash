@@ -111,7 +111,14 @@ namespace Fitcode.MediaStash.Azure
                             blob.Metadata.Add(entry);
                     }
 
-                    await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
+                    try
+                    {
+                        await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
 
                     file.Uri = blob.Uri.ToString();
                 }

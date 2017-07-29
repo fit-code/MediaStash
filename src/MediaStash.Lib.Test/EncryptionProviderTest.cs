@@ -43,8 +43,8 @@ namespace MediaStash.Lib.Test
         private static IEncryptionConfiguration _encryptionConfiguration;
         private static IEncryptionProvider _encryptionProvider;
 
-        private static string _filename = "anime16.jpg";
-        private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
+        private static string _filename = "anime.jpg";
+        private static string _filePath = @"C:\Users\felip\Desktop\";
 
         [SetUp]
         public void Init()

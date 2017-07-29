@@ -28,7 +28,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib
 {
@@ -124,7 +123,7 @@ namespace Fitcode.MediaStash.Lib
             var operations = new List<DirectoryOperation>();
             var files = directoryInfo.GetFiles();
 
-            Parallel.ForEach(files, (f) =>
+            foreach (var f in files)
             {
                 operations.Add(new DirectoryOperation
                 {
@@ -133,7 +132,7 @@ namespace Fitcode.MediaStash.Lib
                     FileData = f.ToByArray(),
                     OriginalPath = f.FullName
                 });
-            });
+            }
 
             if (recursiveSearch)
                 foreach (var dir in directoryInfo.GetDirectories())

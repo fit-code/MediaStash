@@ -53,7 +53,7 @@
       <Name>MediaStash.Azure</Name>
     </ProjectReference>
     <ProjectReference Include="..\MediaStash.Lib\MediaStash.Lib.csproj">
-      <Project>{194190e8-be0b-4914-a044-b4a5c5b7d555}</Project>
+      <Project>{f840b5d6-446e-4184-9d41-fe71351f193a}</Project>
       <Name>MediaStash.Lib</Name>
     </ProjectReference>
   </ItemGroup>

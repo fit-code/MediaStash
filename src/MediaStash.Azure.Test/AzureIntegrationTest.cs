@@ -43,8 +43,8 @@ namespace MediaStash.Lib.Test
         private static IRepositoryConfiguration _repositoryConfiguration;
         private static IMediaRepository _mediaRepository;
 
-        private static string _filename = "anime17.jpg";
-        private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
+        private static string _filename = "anime.jpg";
+        private static string _filePath = @"C:\Users\felip\Desktop\";
         private static string _azurePath = "unit-test";
 
         [SetUp]
@@ -79,7 +79,7 @@ namespace MediaStash.Lib.Test
                 Debug.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
             };
 
-            _mediaRepository.StashDirectoryAsync(@"E:\azure-test", true).Wait();         
+            _mediaRepository.StashDirectoryAsync($@"{_filePath}Test", true).Wait();         
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace MediaStash.Lib.Test
             var result = _mediaRepository.GetMediaAsync(_azurePath, false).Result;
             foreach (var media in result)
             {
-                using (var writer = new FileStream($@"C:\Temp\{media.Name}", FileMode.Create))
+                using (var writer = new FileStream($@"{_filePath}Test\{media.Name}", FileMode.Create))
                 {
                     writer.Write(media.Data, 0, media.Data.Length);
                 }  

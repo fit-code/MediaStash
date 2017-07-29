@@ -51,12 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MediaStash.Lib\MediaStash.Lib.csproj">
-      <Project>{194190e8-be0b-4914-a044-b4a5c5b7d555}</Project>
-      <Name>MediaStash.Lib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="nuget.exe" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.S3.3.3.8.2\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediaStash.Lib\MediaStash.Lib.csproj">
+      <Project>{f840b5d6-446e-4184-9d41-fe71351f193a}</Project>
+      <Name>MediaStash.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

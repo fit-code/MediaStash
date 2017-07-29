@@ -108,14 +108,14 @@ namespace Fitcode.MediaStash.Lib.Providers
             {
                 foreach (var entry in archive.Entries)
                 {
-                    if (Config.SupportedExtensions.Contains(Path.GetExtension(entry.FullName), StringComparer.InvariantCultureIgnoreCase))
+                    if (Config.SupportedExtensions.Contains(Path.GetExtension(entry.FullName), StringComparer.OrdinalIgnoreCase))
                     {
                         using (var tempStream = entry.Open())
                         {
                             using (var destinationStream = new MemoryStream())
                             {
                                 await tempStream.CopyToAsync(destinationStream);
-                                
+
                                 media.Add(new GenericMedia(entry.FullName, destinationStream.ToArray()));
                             }
                         }

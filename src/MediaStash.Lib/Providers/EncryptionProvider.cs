@@ -23,39 +23,58 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Fitcode.MediaStash.Lib.Models;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
+using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Lib.Providers
 {
     public class EncryptionProvider : IEncryptionProvider
     {
 
-       public IEncryptionConfiguration Config { get; private set; }
+        public IEncryptionConfiguration Config { get; private set; }
 
+        private readonly ICryptoTransform _encryptor, _decryptor;
+
+#if NET45
         private RijndaelManaged _rijndaelManaged = new RijndaelManaged
         {
             Mode = CipherMode.ECB,
             Padding = PaddingMode.PKCS7
         };
-        private readonly ICryptoTransform _encryptor, _decryptor;
-
+#else
+        private Aes _aes = Aes.Create();
+#endif
+        
         public EncryptionProvider(IEncryptionConfiguration config)
         {
             Config = config;
-            
+
+#if NET45
             _rijndaelManaged.Key = config.GetKeyBytes;
             _rijndaelManaged.GenerateIV();
 
             _encryptor = _rijndaelManaged.CreateEncryptor();
             _decryptor = _rijndaelManaged.CreateDecryptor();
+#else
+            _aes.Padding = PaddingMode.PKCS7;
+            _aes.Key = config.GetKeyBytes;
+            _aes.GenerateIV();
+
+            _encryptor = _aes.CreateEncryptor();
+            _decryptor = _aes.CreateDecryptor();
+#endif
+            
         }
 
-        #region Generic Functionality
+#region Generic Functionality
 
         public Task<byte[]> ProcessAsync(byte[] data)
         {
@@ -77,7 +96,7 @@ namespace Fitcode.MediaStash.Lib.Providers
             return Decrypt(data);
         }
 
-        #endregion
+#endregion
 
         public void Encrypt(IEnumerable<IMedia> mediaCollection)
         {
@@ -115,7 +134,8 @@ namespace Fitcode.MediaStash.Lib.Providers
 
         public async Task EncryptAsync(IEnumerable<IMedia> mediaCollection)
         {
-            foreach (var media in mediaCollection) {
+            foreach (var media in mediaCollection)
+            {
                 using (var encryptedStream = new MemoryStream())
                 {
                     using (CryptoStream cryptoStream = new CryptoStream(encryptedStream, _encryptor, CryptoStreamMode.Write))

@@ -13,8 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediaStash.Amazon.Core\MediaStash.Amazon.Core.csproj" />
-    <ProjectReference Include="..\MediaStash.Lib.Core\MediaStash.Lib.Core.csproj" />
+    <ProjectReference Include="..\MediaStash.Lib\MediaStash.Lib.csproj" />
   </ItemGroup>
 
 </Project>
