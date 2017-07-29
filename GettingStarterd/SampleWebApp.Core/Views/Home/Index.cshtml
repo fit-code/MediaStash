@@ -2,22 +2,25 @@
     ViewData["Title"] = "Getting Started";
 }
 
-<form method="post" enctype="multipart/form-data"
-      asp-controller="Home" asp-action="Index">
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Upload one or more files using this form:</p>
-            <input type="file" name="files" multiple />
-        </div>
+<div class="container">
+    <div class="row">
+        <form method="post" enctype="multipart/form-data"
+              asp-controller="Home" asp-action="Index">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="files" multiple />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Upload" />
-        </div>
+    <div class="row">
+        <a asp-controller="Home" asp-action="ViewFromFiles">View From Files</a><br />
+        <a asp-controller="Home" asp-action="ViewFromPublicUrl">View From PublicUrl</a>
     </div>
-</form>
-
-<div>
-    <a asp-controller="Home" asp-action="ViewFromFiles">View From Files</a><br />
-    <a asp-controller="Home" asp-action="ViewFromPublicUrl">View From PublicUrl</a>
 </div>
