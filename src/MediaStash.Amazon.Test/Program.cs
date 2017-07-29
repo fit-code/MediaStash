@@ -38,16 +38,16 @@ namespace MediaStash.Amazon.Core.Test
         private static IRepositoryConfiguration _repositoryConfiguration;
         private static IAmazonMediaRepository _mediaRepository;
 
-        private static string _filename = "anime17.jpg";
-        private static string _filePath = @"C:\Users\felip_kw0ekdh\Desktop\";
+        private static string _filename = "anime.jpg";
+        private static string _filePath = @"C:\Users\felip\Desktop\";
         private static string _amazonPath = "unit-test";
 
         public static void Main(string[] args)
         {
             Init();
-            //TestListBucket();
-            //TestUpload();
-            //TestDownload();
+            TestListBucket();
+            TestUpload();
+            TestDownload();
             TestDirectioryUpload();
 
             Console.ReadKey();
@@ -70,7 +70,7 @@ namespace MediaStash.Amazon.Core.Test
                 Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
             };
             //var result = _mediaRepository.ListObjectRequest("fitcode", "Temp").GetAwaiter().GetResult();
-            _mediaRepository.StashDirectoryAsync(@"E:\Temp", true).Wait();
+            _mediaRepository.StashDirectoryAsync($"{_filePath}Test", true).Wait();
         }
 
         private static void TestUpload()

@@ -32,8 +32,8 @@ using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
 using Amazon.S3;
 using Amazon.S3.Model;
-using Fitcode.MediaStash.Lib.Helpers;
 using Fitcode.MediaStash.Lib;
+using Fitcode.MediaStash.Lib.Helpers;
 
 namespace Fitcode.MediaStash.AmazonStorage
 {
@@ -46,6 +46,7 @@ namespace Fitcode.MediaStash.AmazonStorage
         public MediaRepository(IRepositoryConfiguration config)
         {
             this.Config = config;
+
 
             if (string.IsNullOrEmpty(config.Account.ServiceUrl))
             {
@@ -297,6 +298,7 @@ namespace Fitcode.MediaStash.AmazonStorage
         }
 
         private bool _disposed = false;
+
         public void Dispose()
         {
             Dispose(true);
