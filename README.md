@@ -8,17 +8,17 @@ Take a look at our getting started solution for a fully functionality MVC applic
 
 ## Sample Upload 
 ```c#
-            var container = new MediaContainer
-            {
-                Media = new List<GenericMedia>
-                {
-                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true)),
-                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true)),
-                    new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true))
-                }
-            };
+   var container = new MediaContainer
+   {
+       Media = new List<GenericMedia>
+       {
+            new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true)),
+            new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true)),
+            new GenericMedia(_filename, new FileStream($"{_filePath}{_filename}", FileMode.Open).ToByteArray(true))
+       }
+   };
 
-            _mediaRepository.StashMediaAsync(_azurePath, container.Media).Wait(); 
+   _mediaRepository.StashMediaAsync(_azurePath, container.Media).Wait(); 
 ```
 
 ## Sample Download 
@@ -32,10 +32,10 @@ Take a look at our getting started solution for a fully functionality MVC applic
 
 ## Directory Upload 
 ```c#
-            // Registering to this event will received status of directory upload.
-            _mediaRepository.OnDirectoryStash += (n) =>
-            {
-                Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
-            };
-            _mediaRepository.StashDirectoryAsync($"{_dirpath}", true).Wait();
+   // Registering to this event will received status of directory upload.
+   _mediaRepository.OnDirectoryStash += (n) =>
+   {
+        Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
+   };
+   _mediaRepository.StashDirectoryAsync($"{_dirpath}", true).Wait();
 ```
