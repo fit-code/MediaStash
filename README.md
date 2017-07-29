@@ -3,7 +3,7 @@ MediaStash library helps easily leverage azure and amazon to store media files. 
 
 Let's say you want to encrypt your images upstream/downstream; with MediaStash you can do it with the default provider, or by adding your own custom implementation. You can also chain providers ex: you can encrypt+watermark by simply adding multiple providers.
 
-##Getting Started
+## Getting Started
 Take a look at our getting started solution for a fully functionality MVC application.
 
 ## Sample Upload 
@@ -28,4 +28,14 @@ Take a look at our getting started solution for a fully functionality MVC applic
    
    // Just public url.
    var result = _mediaRepository.GetMediaAsync(_azurePath, true).Result;
+```
+
+## Directory Upload 
+```c#
+            // Registering to this event will received status of directory upload.
+            _mediaRepository.OnDirectoryStash += (n) =>
+            {
+                Console.WriteLine($"Total Megs: {n.TotalMegabytes.ToString("f2")} Processed: {n.ProcessedMegabytes.ToString("f2")}");
+            };
+            _mediaRepository.StashDirectoryAsync($"{_dirpath}", true).Wait();
 ```
