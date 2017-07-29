@@ -32,8 +32,8 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Fitcode.MediaStash.Lib.Models;
 using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib;
 using Fitcode.MediaStash.Lib.Helpers;
+using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Azure
 {
@@ -111,14 +111,7 @@ namespace Fitcode.MediaStash.Azure
                             blob.Metadata.Add(entry);
                     }
 
-                    try
-                    {
-                        await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
+                    await blob.UploadFromByteArrayAsync(file.Data, 0, file.Data.Length);
 
                     file.Uri = blob.Uri.ToString();
                 }
@@ -188,7 +181,7 @@ namespace Fitcode.MediaStash.Azure
                                     Metadata = new Dictionary<string, string>()
                                 };
 
-                                if (blockBlob.Metadata != null)
+                                if (blockBlob.Metadata!=null)
                                 {
                                     foreach (KeyValuePair<string, string> entry in blockBlob.Metadata)
                                         mediaFile.Metadata.Add(entry.Key, entry.Value);
@@ -232,7 +225,7 @@ namespace Fitcode.MediaStash.Azure
             if (Directory.Exists(path))
             {
                 CloudBlobContainer rootContainer = _blobClient.GetContainerReference(rootStorageContainer);
-                
+
                 var rootDir = new DirectoryInfo(path);
                 List<DirectoryOperation> operations = rootDir.ToOperations().ToList();
 
@@ -247,9 +240,10 @@ namespace Fitcode.MediaStash.Azure
                 var notificationReport = new Notification
                 {
                     TotalFiles = operations.Count,
-                    TotalMegabytes = operations.Sum(s=>s.FileData.Length).ConvertToMegabytes(),
+                    TotalMegabytes = operations.Sum(s => s.FileData.Length).ConvertToMegabytes(),
                     ProcessedMegabytes = 0
                 };
+
 
                 OnDirectoryStash?.Invoke(notificationReport);
 
@@ -264,7 +258,7 @@ namespace Fitcode.MediaStash.Azure
                 }
 
                 return new DirectoryResult(rootDir, rootStorageContainer, operations.Select(s =>
-                    new Tuple<string, string>(s.OriginalPath, s.CloudPath)).ToList());               
+                    new Tuple<string, string>(s.OriginalPath, s.CloudPath)).ToList());
             }
             else
                 throw new InvalidOperationException($"Invalid DirectoryPath: {path}");
