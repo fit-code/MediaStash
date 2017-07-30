@@ -23,20 +23,18 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
+using MediaStash.Lib;
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Services.Content;
+using MediaStash.Lib.Services.Processing;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
 using System.IO;
 using System.Security.Cryptography;
-using Fitcode.MediaStash.Lib;
+using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.Lib.Providers
 {
-    public class EncryptionProvider : IEncryptionProvider
+    public sealed class EncryptionProvider : IEncryptionProvider
     {
 
         public IEncryptionConfiguration Config { get; private set; }

@@ -23,10 +23,10 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
+using MediaStash.Lib.Services.Content;
 using System.Collections.Generic;
 
-namespace Fitcode.MediaStash.Lib.Models
+namespace MediaStash.Lib.Models
 {
     public class MediaContainer : IMediaContainer
     {

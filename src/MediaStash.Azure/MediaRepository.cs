@@ -30,9 +30,11 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Fitcode.MediaStash.Lib.Models;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Helpers;
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Helpers;
+using MediaStash.Lib.Services.Content;
+using MediaStash.Lib;
+using MediaStash.Lib.Services.Processing;
 using Fitcode.MediaStash.Lib;
 
 namespace Fitcode.MediaStash.Azure

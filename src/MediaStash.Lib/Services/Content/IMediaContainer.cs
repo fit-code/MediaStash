@@ -23,21 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-
+using System;
 using System.Collections.Generic;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Services.Content
 {
-    /// <summary>
-    /// Lowest common denominator for media data.
-    /// </summary>
-    public interface IMedia
+    public interface IMediaContainer : IDisposable
     {
-        string Name { get; set; }
-        string Uri { get; set; }
-        string Mime { get; set; }  
-        byte[] Data { get; set; }
-        Dictionary<string, string> Metadata { get; set; }
-        string ToBase64String(); 
+        string Path { get; }
+        IEnumerable<IMedia> Media { get; }
     }
 }

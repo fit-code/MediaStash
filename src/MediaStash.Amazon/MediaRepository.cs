@@ -23,17 +23,19 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using Fitcode.MediaStash.Lib.Models;
-using Fitcode.MediaStash.Lib.Abstractions;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Fitcode.MediaStash.Lib;
-using Fitcode.MediaStash.Lib.Helpers;
+using MediaStash.Lib;
+using MediaStash.Lib.Helpers;
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Services.Content;
+using MediaStash.Lib.Services.Processing;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Fitcode.MediaStash.AmazonStorage
 {

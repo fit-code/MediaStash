@@ -25,8 +25,8 @@
 
 using Fitcode.MediaStash.AmazonStorage;
 using Fitcode.MediaStash.Lib;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
+using MediaStash.Lib;
+using MediaStash.Lib.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;

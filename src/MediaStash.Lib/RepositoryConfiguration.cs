@@ -23,8 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
+using MediaStash.Lib;
+using MediaStash.Lib.Models;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;

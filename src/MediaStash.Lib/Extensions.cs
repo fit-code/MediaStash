@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Models;
+using MediaStash.Lib.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

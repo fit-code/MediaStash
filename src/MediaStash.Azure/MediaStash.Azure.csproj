@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Felipe Ramos</Authors>
     <Company>fitcode.io</Company>
     <Product>MediaStash</Product>
@@ -15,11 +15,11 @@
     <PackageProjectUrl>https://github.com/fit-code/MediaStash</PackageProjectUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/22687448?v=4&amp;s=200</PackageIconUrl>
     <RepositoryUrl>https://github.com/fit-code/MediaStash</RepositoryUrl>
-    <PackageReleaseNotes>Netstandard 1.6</PackageReleaseNotes>
+    <PackageReleaseNotes>Structure cleanup updates</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediaStash.Lib" Version="2.0.0" />
+    <PackageReference Include="MediaStash.Lib" Version="2.0.1" />
     <PackageReference Include="WindowsAzure.Storage" Version="8.2.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">

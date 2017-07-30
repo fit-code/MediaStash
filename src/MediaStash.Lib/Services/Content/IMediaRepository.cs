@@ -23,11 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Helpers;
+using MediaStash.Lib.Helpers;
+using MediaStash.Lib.Services.Processing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Services.Content
 {
     /// <summary>
     /// Media repository contract for all concrete service (Azure, Amazon, Dropbox, etc)

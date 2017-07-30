@@ -23,20 +23,21 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
+
 using System.Collections.Generic;
-using System.IO;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Services.Content
 {
-    public interface IDirectoryResult
+    /// <summary>
+    /// Lowest common denominator for media data.
+    /// </summary>
+    public interface IMedia
     {
-        DirectoryInfo Parent { get; }
-        string RootContainer { get; }
-
-        /// <summary>
-        /// Mapping contains a List of Tuple[source path, cloud path].  
-        /// </summary>
-        IList<Tuple<string, string>> Mapping { get; }
+        string Name { get; set; }
+        string Uri { get; set; }
+        string Mime { get; set; }  
+        byte[] Data { get; set; }
+        Dictionary<string, string> Metadata { get; set; }
+        string ToBase64String(); 
     }
 }

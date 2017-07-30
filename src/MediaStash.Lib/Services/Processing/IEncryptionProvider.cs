@@ -23,11 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Models;
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Services.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Services.Processing
 {
     public interface IEncryptionProvider : IProvider
     {

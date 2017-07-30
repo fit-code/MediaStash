@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.4;netstandard1.6;net45</TargetFrameworks>
     <AssemblyName>MediaStash.Lib</AssemblyName>
     <RootNamespace>MediaStash.Lib</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Felipe Ramos</Authors>
     <Company>Fitcode.io</Company>
     <Product />
@@ -17,12 +17,7 @@
     <RepositoryUrl>https://github.com/fit-code/MediaStash</RepositoryUrl>
     <PackageTags>Media, Images, Compression, Encryption, ASP.NET, MVC, Storage</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageReleaseNotes>
-    <![CDATA[
-      -Moved to netstandard 1.6 since maintaining two versions for 4.5 and Core was too much work and error prone.
-      -Added new providers for watermark and image processing.
-    ]]>
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>Minor version for namespace correction. The prelude to a few changes in the works and more cleanup.</PackageReleaseNotes>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
@@ -35,6 +30,10 @@
   
   <ItemGroup>
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Services\Processing\" />
   </ItemGroup>
   
 </Project>

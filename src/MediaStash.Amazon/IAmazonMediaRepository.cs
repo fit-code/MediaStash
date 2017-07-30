@@ -1,5 +1,5 @@
 ﻿using Amazon.S3.Model;
-using Fitcode.MediaStash.Lib.Abstractions;
+using MediaStash.Lib.Services.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

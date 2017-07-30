@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;net45</TargetFrameworks>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Authors>Felipe Ramos</Authors>
     <Company>fitcode.io</Company>
     <Product>MediaStash</Product>
@@ -13,13 +13,13 @@
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/22687448?v=4&amp;s=200</PackageIconUrl>
     <RepositoryUrl>https://github.com/fit-code/MediaStash</RepositoryUrl>
     <PackageTags>Media, Images, Compression, Encryption, AWS, S3, Amazon, Storage, MVC, ASP.NET</PackageTags>
-    <PackageReleaseNotes>Netstandard 1.6</PackageReleaseNotes>
+    <PackageReleaseNotes>Structure cleanup updates</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.3.8.2" />
-    <PackageReference Include="MediaStash.Lib" Version="2.0.0" />
+    <PackageReference Include="MediaStash.Lib" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
   </ItemGroup>

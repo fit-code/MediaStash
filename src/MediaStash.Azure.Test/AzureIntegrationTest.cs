@@ -23,17 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Fitcode.MediaStash.Azure;
+using Fitcode.MediaStash.Lib;
+using Fitcode.MediaStash.Lib.Providers;
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Services.Content;
+using MediaStash.Lib.Services.Processing;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Fitcode.MediaStash.Lib;
-using Fitcode.MediaStash.Lib.Models;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Azure;
-using Fitcode.MediaStash.Lib.Providers;
-using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace MediaStash.Lib.Test
 {

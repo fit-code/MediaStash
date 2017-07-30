@@ -25,7 +25,7 @@
 
 using System.IO;
 
-namespace Fitcode.MediaStash.Lib.Models
+namespace MediaStash.Lib.Models
 {
     public class CompressedPack : PackBase<MemoryStream>
     {

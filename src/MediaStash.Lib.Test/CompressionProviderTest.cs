@@ -24,16 +24,12 @@
 #endregion
 
 using Fitcode.MediaStash.Lib;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
-using Fitcode.MediaStash.Lib.Providers;
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Providers;
+using MediaStash.Lib.Services.Processing;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaStash.Lib.Test
 {

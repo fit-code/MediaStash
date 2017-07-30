@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fitcode.MediaStash.Lib.Helpers
+namespace MediaStash.Lib.Helpers
 {
     public static class MimeResolver
     {

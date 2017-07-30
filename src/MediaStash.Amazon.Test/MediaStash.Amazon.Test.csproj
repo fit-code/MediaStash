@@ -38,11 +38,11 @@
     <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AWSSDK.S3.3.3.8.2\lib\net45\AWSSDK.S3.dll</HintPath>
     </Reference>
-    <Reference Include="MediaStash.Amazon, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MediaStash.Amazon.2.0.0\lib\net45\MediaStash.Amazon.dll</HintPath>
+    <Reference Include="MediaStash.Amazon, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MediaStash.Amazon.2.0.1\lib\net45\MediaStash.Amazon.dll</HintPath>
     </Reference>
-    <Reference Include="MediaStash.Lib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MediaStash.Lib.2.0.0\lib\net45\MediaStash.Lib.dll</HintPath>
+    <Reference Include="MediaStash.Lib, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MediaStash.Lib.2.0.1\lib\net45\MediaStash.Lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

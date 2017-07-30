@@ -23,33 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Models;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Services.Processing
 {
-    public interface IRepositoryConfiguration
+    public interface IProvider
     {
-        string ConnectionString { get; }
-        
-        string RootContainer { get; }
+        Task<byte[]> ProcessAsync(byte[] data);
+        byte[] Process(byte[] data);
 
-        ServiceAccount Account { get; }
-    }
-
-    public interface ICompressionConfiguration
-    {
-        IEnumerable<string> SupportedExtensions { get; }
-    }
-
-    public interface IEncryptionConfiguration
-    {
-        string EncryptionExtension { get; }
-        string Password { get; }
-        string Salt { get; }
-        Rfc2898DeriveBytes PasswordDeriveBytes { get; }
-        byte[] GetKeyBytes { get; }
-        void Reset(string password, string salt);
+        Task<byte[]> ReverseAsync(byte[] data);
+        byte[] Reverse(byte[] data);
     }
 }

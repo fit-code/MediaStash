@@ -23,14 +23,15 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Helpers;
+using Fitcode.MediaStash.Lib;
+using MediaStash.Lib.Helpers;
+using MediaStash.Lib.Services.Content;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 
-namespace Fitcode.MediaStash.Lib.Models
+namespace MediaStash.Lib.Models
 {
     /// <summary>
     /// GenericMedia stores media data at the lowest form.

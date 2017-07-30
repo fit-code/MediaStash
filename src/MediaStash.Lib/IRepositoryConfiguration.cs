@@ -23,30 +23,33 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Fitcode.MediaStash.Lib.Models;
+using MediaStash.Lib.Models;
 using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib
 {
-    public interface ICompressionProvider
+    public interface IRepositoryConfiguration
     {
-        ICompressionConfiguration Config { get; }
+        string ConnectionString { get; }
+        
+        string RootContainer { get; }
 
-        Task<CompressedPack> PackAsync(string name, MediaContainer mediaContainer);
-        Task<CompressedPack> PackAsync(string name, MemoryMediaContainer memoryMediaContainer);
-        Task<CompressedPack> PackAsync(string name, IEnumerable<IMedia> mediaCollection);
+        ServiceAccount Account { get; }
+    }
 
-        CompressedPack Pack(string name, MediaContainer mediaContainer);
-        CompressedPack Pack(string name, MemoryMediaContainer memoryMediaContainer);
-        CompressedPack Pack(string name, IEnumerable<IMedia> mediaCollection);
+    public interface ICompressionConfiguration
+    {
+        IEnumerable<string> SupportedExtensions { get; }
+    }
 
-        Task<MediaContainer> UnpackAsync(byte[] buffer);
-        Task<MediaContainer> UnpackAsync(MemoryStream stream);
-
-        MediaContainer Unpack(byte[] buffer);
-        MediaContainer Unpack(MemoryStream stream);
-
+    public interface IEncryptionConfiguration
+    {
+        string EncryptionExtension { get; }
+        string Password { get; }
+        string Salt { get; }
+        Rfc2898DeriveBytes PasswordDeriveBytes { get; }
+        byte[] GetKeyBytes { get; }
+        void Reset(string password, string salt);
     }
 }

@@ -23,16 +23,20 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace Fitcode.MediaStash.Lib.Abstractions
+namespace MediaStash.Lib.Services.Content
 {
-    public interface IProvider
+    public interface IDirectoryResult
     {
-        Task<byte[]> ProcessAsync(byte[] data);
-        byte[] Process(byte[] data);
+        DirectoryInfo Parent { get; }
+        string RootContainer { get; }
 
-        Task<byte[]> ReverseAsync(byte[] data);
-        byte[] Reverse(byte[] data);
+        /// <summary>
+        /// Mapping contains a List of Tuple[source path, cloud path].  
+        /// </summary>
+        IList<Tuple<string, string>> Mapping { get; }
     }
 }

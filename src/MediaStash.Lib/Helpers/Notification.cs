@@ -24,7 +24,7 @@
 #endregion
 
 
-namespace Fitcode.MediaStash.Lib.Helpers
+namespace MediaStash.Lib.Helpers
 {
     public delegate void Notify(Notification notification);
 

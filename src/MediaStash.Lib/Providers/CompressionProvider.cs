@@ -23,19 +23,19 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using MediaStash.Lib.Models;
+using MediaStash.Lib.Services.Content;
+using MediaStash.Lib.Services.Processing;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Lib.Models;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Fitcode.MediaStash.Lib.Providers
+namespace MediaStash.Lib.Providers
 {
-    public class CompressionProvider : ICompressionProvider
+    public sealed class CompressionProvider : ICompressionProvider
     {
         public ICompressionConfiguration Config { get; private set; }
 
