@@ -24,6 +24,7 @@
 #endregion
 
 using MediaStash.Lib.Helpers;
+using MediaStash.Lib.Models;
 using MediaStash.Lib.Services.Processing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace MediaStash.Lib.Services.Content
         /// <summary>
         /// Providers perform transformations to the content before uploading and directly to the downloaded stream.
         /// </summary>
-        IEnumerable<IProvider> Providers { get; }
+        IEnumerable<IProcessProvider> Providers { get; }
 
         /// <summary>
         /// Applies all provider transformations to an IMedia implementation.
@@ -135,6 +136,6 @@ namespace MediaStash.Lib.Services.Content
         Task<IDirectoryResult> StashDirectoryAsync(string path, string rootContainer, bool includeSubDirectory = false);
 
         // Events
-        event Notify OnDirectoryStash;
+        event Notify<UploadNotification> OnDirectoryStash;
     }
 }

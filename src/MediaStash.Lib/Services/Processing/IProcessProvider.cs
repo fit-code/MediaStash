@@ -27,12 +27,16 @@ using System.Threading.Tasks;
 
 namespace MediaStash.Lib.Services.Processing
 {
-    public interface IProvider
+    public interface IProcessProvider
     {
         Task<byte[]> ProcessAsync(byte[] data);
-        byte[] Process(byte[] data);
-
         Task<byte[]> ReverseAsync(byte[] data);
+        byte[] Process(byte[] data);
         byte[] Reverse(byte[] data);
+
+        Task<byte[]> ProcessAsync<T>(T model) where T : IBytesConvertable;
+        Task<T> ReverseAsync<T>(byte[] data) where T : IBytesConvertable;
+        byte[] Process<T>(T model) where T : IBytesConvertable;
+        T Reverse<T>(byte[] data) where T : IBytesConvertable;
     }
 }

@@ -24,14 +24,20 @@
 #endregion
 
 
-namespace MediaStash.Lib.Helpers
-{
-    public delegate void Notify(Notification notification);
+using System.Threading.Tasks;
 
-    public class Notification
+namespace MediaStash.Lib.Services.Processing
+{
+    /// <summary>
+    /// Contract for ProcessProvider constraint. This will give ProcessProvider more flexibility and
+    /// cut down on explicit contract creation for specialized processors like encryption, and compression.
+    /// </summary>
+    public interface IBytesConvertable
     {
-        public int TotalFiles { get; set; }
-        public double TotalMegabytes { get; set; }
-        public double ProcessedMegabytes { get; set; }
+        byte[] ToByteArray();
+        T FromByteArray<T>(byte[] buffer);
+
+        Task<byte[]> ToByteArrayAsync();
+        Task<T> FromByteArrayAsync<T>(byte[] buffer);
     }
 }

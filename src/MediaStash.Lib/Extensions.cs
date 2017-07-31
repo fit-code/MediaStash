@@ -29,7 +29,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace Fitcode.MediaStash.Lib
+namespace MediaStash.Lib
 {
     public static class Extensions
     {

@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 
 namespace MediaStash.Lib.Services.Processing
 {
-    public interface IEncryptionProvider : IProvider
+    public interface IEncryptionProvider : IProcessProvider
     {
         IEncryptionConfiguration Config { get; }
 

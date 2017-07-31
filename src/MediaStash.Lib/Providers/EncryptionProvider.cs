@@ -31,6 +31,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System;
 
 namespace Fitcode.MediaStash.Lib.Providers
 {
@@ -94,7 +95,27 @@ namespace Fitcode.MediaStash.Lib.Providers
             return Decrypt(data);
         }
 
-#endregion
+        public Task<byte[]> ProcessAsync<T>(T model) where T : IBytesConvertable
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> ReverseAsync<T>(byte[] data) where T : IBytesConvertable
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] Process<T>(T model) where T : IBytesConvertable
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Reverse<T>(byte[] data) where T : IBytesConvertable
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         public void Encrypt(IEnumerable<IMedia> mediaCollection)
         {
