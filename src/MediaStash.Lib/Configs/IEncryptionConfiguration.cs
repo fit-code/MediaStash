@@ -23,25 +23,18 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System.IO;
+using System.Security.Cryptography;
 
-namespace MediaStash.Lib.Models
+namespace MediaStash.Lib.Configs
 {
-    public class CompressedPack : PackBase<MemoryStream>
+    public interface IEncryptionConfiguration
     {
-        public CompressedPack(string name, byte[] packageBytes) : base(name, new MemoryStream(packageBytes))
-        {
+        string EncryptionExtension { get; }
+        byte[] GetKeyBytes { get; }
+        string Password { get; }
+        Rfc2898DeriveBytes PasswordDeriveBytes { get; }
+        string Salt { get; }
 
-        }
-
-        public CompressedPack(string name, MemoryStream packaged) : base(name, packaged)
-        {
-
-        }
-
-        public CompressedPack(string name, MemoryStream packaged, string uri) : base(name, packaged, uri)
-        {
-
-        }
+        void Reset(string password, string salt);
     }
 }

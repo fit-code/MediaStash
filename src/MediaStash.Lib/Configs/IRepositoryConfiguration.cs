@@ -23,25 +23,21 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System.IO;
-
-namespace MediaStash.Lib.Models
+namespace MediaStash.Lib.Configs
 {
-    public class CompressedPack : PackBase<MemoryStream>
+    public interface IRepositoryConfiguration
     {
-        public CompressedPack(string name, byte[] packageBytes) : base(name, new MemoryStream(packageBytes))
-        {
+        // Database / Storage Connection
+        string ConnectionString { get; }
+        
+        // Default Root
+        string RootContainer { get; }
 
-        }
-
-        public CompressedPack(string name, MemoryStream packaged) : base(name, packaged)
-        {
-
-        }
-
-        public CompressedPack(string name, MemoryStream packaged, string uri) : base(name, packaged, uri)
-        {
-
-        }
+        // API configurable values
+        string ServiceUrl { get; }
+        string AppId { get; }
+        string AppSecret { get; }
+        string Token { get; }
+        string Meta { get; }
     }
 }

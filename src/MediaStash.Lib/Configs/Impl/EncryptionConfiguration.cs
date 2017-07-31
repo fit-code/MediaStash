@@ -24,30 +24,12 @@
 #endregion
 
 using MediaStash.Lib;
-using MediaStash.Lib.Models;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Fitcode.MediaStash.Lib
+namespace MediaStash.Lib.Configs
 {
-    public class RepositoryConfiguration : IRepositoryConfiguration
-    {
-        public ServiceAccount Account { get; set; }
-
-        public string ConnectionString { get; set; }
-
-        public string RootContainer { get; set; }
-    }
-
-    public class CompressionConfiguration : ICompressionConfiguration
-    {
-        public IEnumerable<string> SupportedExtensions { get; set; } = new List<string>
-        {
-             ".png", ".gif", ".bmp", ".jpg", ".avi", ".mp4", ".flv"
-        };
-    }
-
     public class EncryptionConfiguration : IEncryptionConfiguration
     {
         public string Password { get; set; }

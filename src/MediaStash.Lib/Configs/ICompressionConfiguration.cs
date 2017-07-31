@@ -23,33 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using MediaStash.Lib.Models;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 
-namespace MediaStash.Lib
+namespace MediaStash.Lib.Configs
 {
-    public interface IRepositoryConfiguration
-    {
-        string ConnectionString { get; }
-        
-        string RootContainer { get; }
-
-        ServiceAccount Account { get; }
-    }
-
     public interface ICompressionConfiguration
     {
         IEnumerable<string> SupportedExtensions { get; }
-    }
-
-    public interface IEncryptionConfiguration
-    {
-        string EncryptionExtension { get; }
-        string Password { get; }
-        string Salt { get; }
-        Rfc2898DeriveBytes PasswordDeriveBytes { get; }
-        byte[] GetKeyBytes { get; }
-        void Reset(string password, string salt);
     }
 }

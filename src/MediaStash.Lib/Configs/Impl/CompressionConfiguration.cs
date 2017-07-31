@@ -23,8 +23,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace MediaStash.Lib.Helpers
+namespace MediaStash.Lib.Configs
 {
-    public delegate void Notify<T>(T notification);
+    public class CompressionConfiguration : ICompressionConfiguration
+    {
+        public IEnumerable<string> SupportedExtensions { get; set; } = new List<string>
+        {
+             ".png", ".gif", ".bmp", ".jpg", ".avi", ".mp4", ".flv"
+        };
+    }
 }

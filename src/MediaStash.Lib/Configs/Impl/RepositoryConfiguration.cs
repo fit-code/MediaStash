@@ -23,42 +23,24 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-
-namespace MediaStash.Lib.Models
+namespace MediaStash.Lib.Configs
 {
-    public class ServiceAccount
+    public class RepositoryConfiguration : IRepositoryConfiguration
     {
-        public string ServiceUrl { get; set; } = null;
-        public string Key { get; private set;}
-        public string Secret { get; private set; }
-        public string Token { get; private set; }
 
-        public ServiceAccount() { }
-        public ServiceAccount(string key, string secret)
-        {
-            this.Key = key;
-            this.Secret = secret;
-        }
-        public ServiceAccount(string key, string secret, string token) : this(key, secret)
-        {
-            this.Token = token;
-        }
+        public string ConnectionString { get; set; }
 
-        public static ServiceAccount Create(string key, string secret)
-        {
-            return new ServiceAccount
-            {
-                Key = key,
-                Secret = secret
-            };
-        }
+        public string RootContainer { get; set; }
 
-        public static ServiceAccount CreateForS3(string key, string secret, string serviceUrl = null)
-        {
-            return new ServiceAccount(key, secret)
-            {
-                ServiceUrl = serviceUrl
-            };
-        }
+        public string ServiceUrl { get; set; }
+
+        public string AppId { get; set; }
+
+        public string AppSecret { get; set; }
+
+        public string Token { get; set; }
+
+        public string Meta { get; set; }
+
     }
 }

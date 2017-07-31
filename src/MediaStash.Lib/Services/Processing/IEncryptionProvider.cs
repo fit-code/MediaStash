@@ -23,6 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using MediaStash.Lib.Configs;
 using MediaStash.Lib.Models;
 using MediaStash.Lib.Services.Content;
 using System.Collections.Generic;

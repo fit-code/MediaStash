@@ -23,25 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System.IO;
 
-namespace MediaStash.Lib.Models
+namespace MediaStash.Lib
 {
-    public class CompressedPack : PackBase<MemoryStream>
-    {
-        public CompressedPack(string name, byte[] packageBytes) : base(name, new MemoryStream(packageBytes))
-        {
-
-        }
-
-        public CompressedPack(string name, MemoryStream packaged) : base(name, packaged)
-        {
-
-        }
-
-        public CompressedPack(string name, MemoryStream packaged, string uri) : base(name, packaged, uri)
-        {
-
-        }
-    }
+    public delegate void Notify<T>(T notification);
 }
