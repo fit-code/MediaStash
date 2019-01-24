@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.S3" Version="3.3.8.2" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.31.12" />
     <PackageReference Include="MediaStash.Lib" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
