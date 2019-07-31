@@ -24,10 +24,10 @@ Take a look at our getting started solution for a fully functionality MVC applic
 ## Sample Download 
 ```c#
    // Download file and returns public url.
-   var result = _mediaRepository.GetMediaAsync(_azurePath).Result;
+   var result = await _mediaRepository.GetMediaAsync(_azurePath);
    
    // Just public url.
-   var result = _mediaRepository.GetMediaAsync(_azurePath, true).Result;
+   var result = await _mediaRepository.GetMediaAsync(_azurePath, true);
 ```
 
 ## Directory Upload 
