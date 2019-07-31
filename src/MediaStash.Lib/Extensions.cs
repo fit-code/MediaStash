@@ -33,25 +33,6 @@ namespace MediaStash.Lib
 {
     public static class Extensions
     {
-        ///// <summary>
-        ///// Grab the byte array from IFile concrete type.
-        ///// </summary>
-        ///// <param name="file">IFile</param>
-        ///// <returns>byte[stream.Length]</returns>
-        //public static async Task<byte[]> ToByteArray(this IFile file)
-        //{
-        //    if (file == null) return null;
-
-        //    using (var stream = await file.OpenAsync(FileAccess.Read))
-        //    {
-        //        var buffer = new byte[stream.Length];
-
-        //        stream.Read(buffer, 0, buffer.Length);
-
-        //        return buffer;
-        //    }
-        //}
-
         /// <summary>
         /// Grab the byte array for any stream.
         /// </summary>

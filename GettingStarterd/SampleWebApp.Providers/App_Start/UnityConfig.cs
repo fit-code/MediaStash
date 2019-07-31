@@ -1,11 +1,6 @@
 using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
-using Fitcode.MediaStash.Lib.Abstractions;
-using Fitcode.MediaStash.Azure;
-using Fitcode.MediaStash.Lib;
-using System.Collections.Generic;
-using Fitcode.MediaStash.Lib.Providers;
 
 namespace SampleWebApp.Providers.App_Start
 {
@@ -40,18 +35,8 @@ namespace SampleWebApp.Providers.App_Start
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterInstance<IMediaRepository>(new MediaRepository(new RepositoryConfiguration
-            {
-                RootContainer = "dev",
-                ConnectionString = StorageConnection.ConnectionString
-            },
-            new List<IProvider>
-            {
-                new EncryptionProvider(new EncryptionConfiguration
-                {
-                    Password = "test"
-                })
-            }));
+            // TODO: Register your types here
+            // container.RegisterType<IProductRepository, ProductRepository>();
         }
     }
 }
