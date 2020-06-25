@@ -16,7 +16,15 @@
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/22687448?v=4&amp;s=200</PackageIconUrl>
     <RepositoryUrl>https://github.com/fit-code/MediaStash</RepositoryUrl>
     <PackageReleaseNotes>Structure cleanup updates</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="MediaStash.Lib" Version="2.0.1" />
